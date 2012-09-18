@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+
+# Eclipse files
+.metadata
+.settings
+.project
+.classpath
