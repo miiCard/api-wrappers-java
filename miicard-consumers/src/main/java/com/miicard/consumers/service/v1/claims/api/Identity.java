@@ -1,10 +1,5 @@
 package com.miicard.consumers.service.v1.claims.api;
 
-/**
- * 
- * @author Derek Sooman dsooman@hotmail.com
- *
- */
 public interface Identity extends Claim {
 
 	/**

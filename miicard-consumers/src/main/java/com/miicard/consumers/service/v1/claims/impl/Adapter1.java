@@ -4,11 +4,6 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- * 
- * @author Derek Sooman
- *
- */
 class Adapter1 extends XmlAdapter<String, Date> {
 	
 	@SuppressWarnings("deprecation")

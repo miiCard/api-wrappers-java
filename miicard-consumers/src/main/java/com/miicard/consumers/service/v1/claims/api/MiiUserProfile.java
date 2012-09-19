@@ -3,11 +3,6 @@ package com.miicard.consumers.service.v1.claims.api;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 
- * @author Derek Sooman dsooman@hotmail.com
- *
- */
 public interface MiiUserProfile {
 
 	/**
