@@ -1,7 +1,9 @@
 package com.miicard.consumers.service.v1.claims.impl;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,6 +12,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.miicard.consumers.service.v1.claims.api.EmailAddress;
 import com.miicard.consumers.service.v1.claims.api.Identity;
@@ -99,10 +104,9 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     @XmlElement(name = "LastName", nillable = true)
     protected String lastName;
     
-    @XmlElement(name = "LastVerified", type = String.class, nillable = true)
-    @XmlJavaTypeAdapter(Adapter1 .class)
+    @XmlElement(name = "LastVerified")
     @XmlSchemaType(name = "dateTime")
-    protected Date lastVerified;
+    protected XMLGregorianCalendar lastVerified;
     
     @XmlElement(name = "MiddleName", nillable = true)
     protected String middleName;
@@ -313,7 +317,7 @@ public class MiiUserProfileImpl implements MiiUserProfile {
      *     
      */
     public final Date getLastVerified() {
-        return lastVerified;
+        return lastVerified.toGregorianCalendar().getTime();
     }
 
     /**
@@ -325,8 +329,16 @@ public class MiiUserProfileImpl implements MiiUserProfile {
      */
     public final void setLastVerified(
     		final Date value) {
-        
-    	this.lastVerified = value;
+    	GregorianCalendar g = new GregorianCalendar();
+    	g.setTime(value);
+    	
+    	try 
+    	{
+			this.lastVerified = DatatypeFactory.newInstance().newXMLGregorianCalendar(g);
+		} 
+    	catch (DatatypeConfigurationException e) 
+    	{
+		}
     }
 
     /**

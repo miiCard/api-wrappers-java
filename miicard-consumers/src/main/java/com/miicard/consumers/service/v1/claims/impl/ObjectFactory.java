@@ -10,6 +10,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.Duration;
 import javax.xml.namespace.QName;
 
+import com.miicard.consumers.service.v1.claims.transactional.impl.ArrayOfIdentitySnapshotDetails;
+import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapshotDetailsImpl;
+import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapshotImpl;
+
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
@@ -62,14 +66,60 @@ class ObjectFactory {
     private final static QName _MiiApiResponseOfboolean_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfboolean");
     private final static QName _UnsignedLong_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "unsignedLong");
     private final static QName _ArrayOfEmailAddress_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "ArrayOfEmailAddress");
+    private final static QName _MiiApiResponseOfArrayOfIdentitySnapshotDetails_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfArrayOfIdentitySnapshotDetails");
+    private final static QName _MiiApiResponseOfIdentitySnapshot_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfIdentitySnapshot");
 
+    
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.miicard.consumers.service.v1.claims
      * 
      */
     public ObjectFactory() {
     }
-
+    
+    public final GetIdentitySnapshot createGetIdentitySnapshot() {
+    	return new GetIdentitySnapshot();
+    }
+    
+    public final GetIdentitySnapshotResponse createGetIdentitySnapshotResult()
+    {
+    	return new GetIdentitySnapshotResponse();
+    }
+    
+    public final GetIdentitySnapshotDetails createGetIdentitySnapshotDetails() {
+    	return new GetIdentitySnapshotDetails();
+    }
+    
+    public final GetIdentitySnapshotDetailsResponse createGetIdentitySnapshotDetailsResult()
+    {
+    	return new GetIdentitySnapshotDetailsResponse();
+    }
+    
+    public final MiiApiResponseOfArrayOfIdentitySnapshotDetails createMiiApiResponseOfArrayOfIdentitySnapshotDetails()
+    {
+    	return new MiiApiResponseOfArrayOfIdentitySnapshotDetails();
+    }
+    
+    public final MiiApiResponseOfIdentitySnapshot createMiiApiResponseOfIdentitySnapshot()
+    {
+    	return new MiiApiResponseOfIdentitySnapshot();
+    }
+    
+    public final IdentitySnapshotImpl createIdentitySnapshot()
+    {
+    	return new IdentitySnapshotImpl();
+    }
+    
+    public final IdentitySnapshotDetailsImpl createIdentitySnapshotDetails()
+    {
+    	return new IdentitySnapshotDetailsImpl();
+    }
+    
+    public final ArrayOfIdentitySnapshotDetails createArrayOfIdentitySnapshotDetails()
+    {
+    	return new ArrayOfIdentitySnapshotDetails();
+    }    
+    
     /**
      * Create an instance of {@link IsSocialAccountAssured }
      * 
@@ -621,6 +671,27 @@ class ObjectFactory {
     	return new JAXBElement<ArrayOfEmailAddress>(
     			_ArrayOfEmailAddress_QNAME, 
     			ArrayOfEmailAddress.class, 
+    			null, 
+    			value);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "MiiApiResponseOfArrayOfIdentitySnapshotDetails")
+    public final JAXBElement<MiiApiResponseOfArrayOfIdentitySnapshotDetails> createMiiApiResponseOfArrayOfIdentitySnapshotDetails(
+    		final MiiApiResponseOfArrayOfIdentitySnapshotDetails value) {
+        
+    	return new JAXBElement<MiiApiResponseOfArrayOfIdentitySnapshotDetails>(
+    			_MiiApiResponseOfArrayOfIdentitySnapshotDetails_QNAME, 
+    			MiiApiResponseOfArrayOfIdentitySnapshotDetails.class, 
+    			null, 
+    			value);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "MiiApiResponseOfIdentitySnapshot")
+    public final JAXBElement<MiiApiResponseOfIdentitySnapshot> createMiiApiResponseOfIdentitySnapshot(final MiiApiResponseOfIdentitySnapshot value) {
+        
+    	return new JAXBElement<MiiApiResponseOfIdentitySnapshot>(
+    			_MiiApiResponseOfIdentitySnapshot_QNAME, 
+    			MiiApiResponseOfIdentitySnapshot.class, 
     			null, 
     			value);
     }

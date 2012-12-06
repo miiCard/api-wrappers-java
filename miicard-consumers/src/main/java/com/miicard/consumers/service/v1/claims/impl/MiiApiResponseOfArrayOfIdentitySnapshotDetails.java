@@ -5,40 +5,20 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- * <p>Java class for MiiApiResponseOfMiiUserProfile complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="MiiApiResponseOfMiiUserProfile">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Data" type="{http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api}MiiUserProfile" minOccurs="0"/>
- *         &lt;element name="ErrorCode" type="{http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api}MiiApiErrorCode" minOccurs="0"/>
- *         &lt;element name="ErrorMessage" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Status" type="{http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api}MiiApiCallStatus" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
+import com.miicard.consumers.service.v1.claims.transactional.impl.ArrayOfIdentitySnapshotDetails;
+
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MiiApiResponseOfMiiUserProfile", propOrder = {
+@XmlType(name = "MiiApiResponseOfArrayOfIdentitySnapshotDetails", propOrder = {
     "data",
     "errorCode",
     "errorMessage",
     "isTestUser",
     "status"
 })
-public class MiiApiResponseOfMiiUserProfile {
+public class MiiApiResponseOfArrayOfIdentitySnapshotDetails {
 
     @XmlElement(name = "Data", nillable = true)
-    protected MiiUserProfileImpl data;
+    protected ArrayOfIdentitySnapshotDetails data;
     
     @XmlElement(name = "ErrorCode")
     protected MiiApiErrorCode errorCode;
@@ -56,22 +36,22 @@ public class MiiApiResponseOfMiiUserProfile {
      * Gets the value of the data property.
      * 
      * @return possible object is
-     * {@link MiiUserProfileImpl }
+     * {@link ArrayOfIdentitySnapshotDetails }
      *     
      */
-    public final MiiUserProfileImpl getData() {
+    public final ArrayOfIdentitySnapshotDetails getData() {
         return data;
     }
-    
+
     /**
      * Sets the value of the data property.
      * 
      * @param value allowed object is
-     * {@link MiiUserProfileImpl }
+     * {@link ArrayOfIdentitySnapshotDetails }
      *     
      */
     public final void setData(
-    		final MiiUserProfileImpl value) {
+    		final ArrayOfIdentitySnapshotDetails value) {
         
     	this.data = value;
     }

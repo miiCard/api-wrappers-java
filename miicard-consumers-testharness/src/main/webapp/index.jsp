@@ -63,6 +63,16 @@
         		&& !viewModel.getAssuranceImageType().isEmpty()) {
         	viewModel.setShowAssuranceImage(true);
         }
+        else if (action.equals("get-identity-snapshot-details"))
+        {
+        	viewModel.setLastGetIdentitySnapshotDetailsResult(Prettify.renderResponse(service.getIdentitySnapshotDetails(viewModel.getIdentitySnapshotDetailsId())));
+        }
+        else if (action.equals("get-identity-snapshot") 
+        		&& viewModel.getIdentitySnapshotId() != null
+        		&& !viewModel.getIdentitySnapshotId().isEmpty())
+        {
+        	viewModel.setLastGetIdentitySnapshotResult(Prettify.renderResponse(service.getIdentitySnapshot(viewModel.getIdentitySnapshotId())));
+        }
     }
     else if (action != null) {
     	viewModel.setShowOAuthDetailsRequiredError(true);
@@ -75,7 +85,11 @@
     <link rel="Stylesheet" type="text/css" href="Site.css" />
     <script href="jquery-1.8.0.min.js"></script>
     <script href="bootstrap.min.js"></script>
-    <title></title>
+    <style type="text/css">
+      .page-header { margin-top: 50px; margin-bottom: 10px; }
+      input[type=text] { width: 50%; }
+    </style>
+    <title>miiCard Java API Wrappers Test Harness</title>
 </head>
 
 <body>
@@ -88,7 +102,7 @@
     <form method="POST">
         <div class="page-header">
             <h1>OAuth token settings
-            <small>Enter manually or login with miiCard</small>
+            <small>Enter manually</small>
             </h1>
         </div>
         <div class="row">
@@ -186,6 +200,44 @@
                 <p><img src="assuranceimage?oauth-consumer-key=<%= URLEncoder.encode(viewModel.getConsumerKey(), "UTF8") %>&oauth-consumer-secret=<%= URLEncoder.encode(viewModel.getConsumerSecret(), "UTF8") %>&oauth-access-token=<%= URLEncoder.encode(viewModel.getAccessToken(), "UTF8") %>&oauth-access-token-secret=<%= URLEncoder.encode(viewModel.getAccessTokenSecret(), "UTF8") %>&type=<%= viewModel.getAssuranceImageType() %>" /></p>
                 <% } %>
                 <button type="submit" name="btn-invoke" value="assurance-image" class="btn btn-large">Invoke method &raquo;</button>
+            </div>
+        </div>
+        
+        <div class="page-header">
+            <h2>GetIdentitySnapshotDetails
+            <small>Retrieve metadata about an identity snapshot</small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h3>Parameters</h3>
+                <label for="identitySnapshotDetailsSnapshotId">Snapshot ID (blank to list all)</label>
+                <input type="text" name="identitySnapshotDetailsSnapshotId" value="<%= viewModel.getIdentitySnapshotDetailsId() %>" />
+
+                <h4>Result</h4>
+                <% if (viewModel.getLastGetIdentitySnapshotDetailsResult() != null) { %>
+                <p><%= viewModel.getLastGetIdentitySnapshotDetailsResult() %></p>
+                <% } %>
+                <button type="submit" name="btn-invoke" value="get-identity-snapshot-details" class="btn btn-large">Invoke method &raquo;</button>
+            </div>
+        </div>
+
+        <div class="page-header">
+            <h2>GetIdentitySnapshot
+            <small>Retrieve a previously created snapshot of a miiCard member's identity</small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h3>Parameters</h3>
+                <label for="identitySnapshotId">Snapshot ID</label>
+                <input type="text" name="identitySnapshotId" value="<%= viewModel.getIdentitySnapshotId() %>" />
+
+                <h4>Result</h4>
+                <% if (viewModel.getLastGetIdentitySnapshotResult() != null) { %>
+                <p><%= viewModel.getLastGetIdentitySnapshotResult() %></p>
+                <% } %>
+                <button type="submit" name="btn-invoke" value="get-identity-snapshot" class="btn btn-large">Invoke method &raquo;</button>
             </div>
         </div>
     </form>

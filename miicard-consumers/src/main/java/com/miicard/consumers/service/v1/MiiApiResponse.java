@@ -28,6 +28,13 @@ public class MiiApiResponse<T> {
     private T data;
     
     /**
+     * Whether the response relates to a user marked as a tester - for these types of users
+     * identity assurance status always reports as valid, so cannot be trusted in production
+     * systems.
+     */
+    private boolean isTestUser;
+    
+    /**
      * The Error Code.
      */
     private MiiApiErrorCode errorCode;
@@ -72,22 +79,35 @@ public class MiiApiResponse<T> {
     }
     
     /**
+     * Returns whether the response relates to a user marked as a tester - for these types of users
+     * identity assurance status always reports as valid, so cannot be trusted in production
+     * systems.
+     * @return True if the user is marked as a tester
+     */
+    public final boolean getIsTestUser() {
+    	return this.isTestUser;
+    }
+    
+    /**
      * Initialises a new MiiApiResponse.
      * 
      * @param status        the overall status of the API call
      * @param errorCode     the error code of any error raised by making the API call
      * @param errorMessage  the error message associated with any error raised by making the API call
      * @param data          the payload of the call, if any
+     * @param isTestUser    whether the user is a tester
      */
     public MiiApiResponse(
     		final MiiApiCallStatus status, 
     		final MiiApiErrorCode errorCode, 
     		final String errorMessage, 
-    		final T data) {
+    		final T data,
+    		final boolean isTestUser) {
         
     	this.status = status;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
         this.data = data;
+        this.isTestUser = isTestUser;
     }
 }

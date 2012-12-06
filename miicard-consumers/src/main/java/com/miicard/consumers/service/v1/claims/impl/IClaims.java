@@ -19,7 +19,8 @@ import javax.xml.ws.ResponseWrapper;
  */
 @WebService(name = "IClaims", targetNamespace = "http://tempuri.org/")
 @XmlSeeAlso({
-    ObjectFactory.class
+    ObjectFactory.class,
+    com.miicard.consumers.service.v1.claims.transactional.impl.ObjectFactory.class
 })
 public interface IClaims {
 	
@@ -43,6 +44,22 @@ public interface IClaims {
     byte[] assuranceImage(
         @WebParam(name = "type", targetNamespace = "http://tempuri.org/")
         String type);
+    
+    @WebMethod(operationName = "GetIdentitySnapshotDetails", action = "http://tempuri.org/IClaims/GetIdentitySnapshotDetails")
+    @WebResult(name = "GetIdentitySnapshotDetailsResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetIdentitySnapshotDetails", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshotDetails")
+    @ResponseWrapper(localName = "GetIdentitySnapshotDetailsResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshotDetailsResponse")
+    MiiApiResponseOfArrayOfIdentitySnapshotDetails getIdentitySnapshotDetails(
+        @WebParam(name = "snapshotId", targetNamespace = "http://tempuri.org/")
+        String snapshotId);
+    
+    @WebMethod(operationName = "GetIdentitySnapshot", action = "http://tempuri.org/IClaims/GetIdentitySnapshot")
+    @WebResult(name = "GetIdentitySnapshotResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetIdentitySnapshot", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshot")
+    @ResponseWrapper(localName = "GetIdentitySnapshotResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshotResponse")
+    MiiApiResponseOfIdentitySnapshot getIdentitySnapshot(
+        @WebParam(name = "snapshotId", targetNamespace = "http://tempuri.org/")
+        String snapshotId);
 
     /**
      * @param socialAccountId

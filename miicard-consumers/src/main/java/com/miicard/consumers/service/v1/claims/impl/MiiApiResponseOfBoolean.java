@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
     "data",
     "errorCode",
     "errorMessage",
+    "isTestUser",
     "status"
 })
 public class MiiApiResponseOfBoolean {
@@ -44,6 +45,9 @@ public class MiiApiResponseOfBoolean {
     
     @XmlElement(name = "ErrorMessage", nillable = true)
     protected String errorMessage;
+    
+    @XmlElement(name = "IsTestUser")
+    protected Boolean isTestUser;
     
     @XmlElement(name = "Status")
     protected MiiApiCallStatus status;
@@ -118,6 +122,15 @@ public class MiiApiResponseOfBoolean {
     		final String value) {
         
     	this.errorMessage = value;
+    }
+    
+    public final Boolean getIsTestUser() {
+    	return isTestUser;
+    }
+    
+    public final void setIsTestUser(Boolean isTestUser)
+    {
+    	this.isTestUser = isTestUser;
     }
 
     /**

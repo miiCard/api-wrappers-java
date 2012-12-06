@@ -34,6 +34,24 @@ public enum MiiApiErrorCode {
     @XmlEnumValue("UserSubscriptionLapsed")
     USER_SUBSCRIPTION_LAPSED("UserSubscriptionLapsed"),
     
+    @XmlEnumValue("TransactionalSupportDisabled")
+	TRANSACTIONAL_SUPPORT_DISABLED("TransactionalSupportDisabled"),
+	
+	@XmlEnumValue("DevelopmentTransactionalSupportOnly")
+	DEVELOPMENT_TRANSACTIONAL_SUPPORT_ONLY("DevelopmentTransactionalSupportOnly"),
+	
+	@XmlEnumValue("InvalidSnapshotId")
+	INVALID_SNAPSHOT_ID("InvalidSnapshotId"),
+	
+	@XmlEnumValue("Blacklisted")
+	BLACKLISTED("Blacklisted"),
+	
+	@XmlEnumValue("ProductDisabled")
+	PRODUCT_DISABLED("ProductDisabled"),
+	
+	@XmlEnumValue("ProductDeleted")
+	PRODUCT_DELETED("ProductDeleted"),
+    
     @XmlEnumValue("Exception")
     EXCEPTION("Exception");
     

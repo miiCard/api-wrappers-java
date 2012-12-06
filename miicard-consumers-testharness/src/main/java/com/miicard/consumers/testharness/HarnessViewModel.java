@@ -42,6 +42,9 @@ public class HarnessViewModel {
      */
     private String lastIsSocialAccountAssuredResult;
     
+    private String lastGetIdentitySnapshotDetailsResult;
+    private String lastGetIdentitySnapshotResult;
+    
     /**
      * Boolean of show Assurance image.
      */
@@ -66,6 +69,9 @@ public class HarnessViewModel {
      * Boolean of if show OAuth details is required.
      */
     private boolean showOAuthDetailsRequiredError;
+    
+    private String identitySnapshotDetailsId = "";
+    private String identitySnapshotId = "";
 
     /**
      * Gets the Consumer Key.
@@ -208,6 +214,22 @@ public class HarnessViewModel {
     	this.lastIsSocialAccountAssuredResult 
     		= lastIsSocialAccountAssuredResult;
     }
+    
+    public final String getLastGetIdentitySnapshotDetailsResult() {
+    	return lastGetIdentitySnapshotDetailsResult;
+    }
+    
+    public final void setLastGetIdentitySnapshotDetailsResult(String lastGetIdentitySnapshotDetailsResult){
+    	this.lastGetIdentitySnapshotDetailsResult = lastGetIdentitySnapshotDetailsResult;
+    }
+    
+    public final String getLastGetIdentitySnapshotResult() {
+    	return lastGetIdentitySnapshotResult;
+    }
+    
+    public final void setLastGetIdentitySnapshotResult(String lastGetIdentitySnapshotResult) {
+    	this.lastGetIdentitySnapshotResult = lastGetIdentitySnapshotResult;
+    }
 
     /**
      * Is showAssuranceImage true?
@@ -309,5 +331,21 @@ public class HarnessViewModel {
         
     	this.showOAuthDetailsRequiredError 
     		= showOAuthDetailsRequiredError;
+    }
+    
+    public final String getIdentitySnapshotDetailsId() {
+    	return this.identitySnapshotDetailsId;    	
+    }
+    
+    public final void setIdentitySnapshotDetailsId(String identitySnapshotDetailsId){
+    	this.identitySnapshotDetailsId = identitySnapshotDetailsId;
+    }
+    
+    public final String getIdentitySnapshotId() {
+    	return this.identitySnapshotId;
+    }
+    
+    public final void setIdentitySnapshotId(String identitySnapshotId){
+    	this.identitySnapshotId = identitySnapshotId;
     }
 }

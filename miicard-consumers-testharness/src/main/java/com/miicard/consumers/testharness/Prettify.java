@@ -4,6 +4,8 @@ import com.miicard.consumers.service.v1.MiiApiResponse;
 
 import com.miicard.consumers.service.v1.claims.api.EmailAddress;
 import com.miicard.consumers.service.v1.claims.api.Identity;
+import com.miicard.consumers.service.v1.claims.api.IdentitySnapshot;
+import com.miicard.consumers.service.v1.claims.api.IdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
 import com.miicard.consumers.service.v1.claims.api.PhoneNumber;
 import com.miicard.consumers.service.v1.claims.api.PostalAddress;
@@ -29,21 +31,61 @@ public class Prettify {
 		toReturn += renderFact("Status", response.getStatus());
         toReturn += renderFact("Error code", response.getErrorCode());
         toReturn += renderFact("Error message", response.getErrorMessage());
-
+        toReturn += renderFact("Is test user?", response.getIsTestUser());
+        
         Object data = response.getData();
         
-        if (data instanceof MiiUserProfile) {
-        	toReturn += Prettify.renderUserProfile(
-        			(MiiUserProfile) response.getData());
+        if (data == null)
+        {
+        	toReturn += renderFact("Data", null);
         }
-        else {
-        	toReturn += renderFact("Data", data);
+        else if (data instanceof Iterable<?>)
+        {
+        	int ct = 0;
+        	for (Object obj : (Iterable<?>) data)
+        	{
+        		toReturn += "<div class='fact'><h4>[" + ct + "]</h4>";
+        		
+        		toReturn += getRenderedObject(obj);
+        		
+        		toReturn += "</div>";
+        		
+        		ct++;
+        	}
+        }
+        else 
+        {
+        	toReturn += getRenderedObject(data);
         }
         
         toReturn += "</div>";
 
         return toReturn;
     }
+	
+	private final static String getRenderedObject(Object obj)
+	{
+		if (obj == null)
+		{
+			return renderFact("Data", obj);
+		}
+		else if (obj instanceof MiiUserProfile)
+		{
+			return Prettify.renderUserProfile((MiiUserProfile) obj); 
+		}
+		else if (obj instanceof IdentitySnapshotDetails)
+		{
+			return Prettify.renderIdentitySnapshotDetails((IdentitySnapshotDetails) obj);
+		}
+		else if (obj instanceof IdentitySnapshot)
+		{
+			return Prettify.renderIdentitySnapshot((IdentitySnapshot) obj);
+		}
+		else
+		{
+			return renderFact("Data", obj);
+		}
+	}
     
 	/**
 	 * Returns the HTML String of the rendered Fact.
@@ -200,7 +242,7 @@ public class Prettify {
             
         	for (PostalAddress address : profile.getPostalAddresses()) {
         		
-        		toReturn += "<div class='fact'><h4>[" + ct++ + "]";
+        		toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
                 toReturn += renderAddress(address);
                 toReturn += "</div>";
             }
@@ -213,7 +255,7 @@ public class Prettify {
             
         	for (PhoneNumber number : profile.getPhoneNumbers()) {
         		
-        		toReturn += "<div class='fact'><h4>[" + ct++ + "]";
+        		toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
                 toReturn += renderPhone(number);
                 toReturn += "</div>";
             }
@@ -226,7 +268,7 @@ public class Prettify {
             
         	for (EmailAddress address : profile.getEmailAddresses()) {
         		
-        		toReturn += "<div class='fact'><h4>[" + ct++ + "]";
+        		toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
                 toReturn += renderEmail(address);
                 toReturn += "</div>";
             }
@@ -239,7 +281,7 @@ public class Prettify {
             
         	for (Identity identity : profile.getIdentities()) {
         		
-        		toReturn += "<div class='fact'><h4>[" + ct++ + "]";
+        		toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
                 toReturn += renderIdentity(identity);
                 toReturn += "</div>";
             }
@@ -255,5 +297,47 @@ public class Prettify {
         toReturn += "</div>";
         
         return toReturn;
+    }
+    
+    /**
+     * Returns the HTML representation of an IdentitySnapshotDetails instance.
+     * 
+     * @param identitySnapshotDetails the object to be rendered
+     * @return HTML representation of the object
+     */
+    private final static String renderIdentitySnapshotDetails(
+    		final IdentitySnapshotDetails identitySnapshotDetails) {
+        
+    	String toReturn = "<div class='fact'>";
+    	
+    	toReturn += renderFact("Snapshot ID", identitySnapshotDetails.getSnapshotId());
+    	toReturn += renderFact("Username", identitySnapshotDetails.getUsername());
+    	toReturn += renderFact("Timestamp", identitySnapshotDetails.getTimestampUtc());
+    	toReturn += renderFact("Was a test user?", identitySnapshotDetails.getWasTestUser());
+                
+        toReturn += "</div>";
+        
+        return toReturn;   
+    }
+    
+    /**
+     * Returns the HTML String of the rendered PostalAddress.
+     * 
+     * @param address the PostalAddress
+     * @return HTML String of the PostalAddress
+     */
+    private final static String renderIdentitySnapshot(
+    		final IdentitySnapshot identitySnapshot) {
+        
+    	String toReturn = "<div class='fact'>";
+    	
+    	toReturn += renderFactHeading("Snapshot Details");
+    	toReturn += renderIdentitySnapshotDetails(identitySnapshot.getDetails());
+    	toReturn += renderFactHeading("Snapshot");
+    	toReturn += renderUserProfile(identitySnapshot.getSnapshot());
+                
+        toReturn += "</div>";
+        
+        return toReturn;   
     }
 }
