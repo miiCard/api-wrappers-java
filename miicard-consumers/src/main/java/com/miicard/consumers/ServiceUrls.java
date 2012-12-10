@@ -18,6 +18,6 @@ public class ServiceUrls {
      * The endpoint URL used for the Claims service.
      */
     public static final String CLAIMS_SERVICE_V1 
-    	= "https://stsbeta.miicard.com/api/v1/Claims.svc";
+    	= "https://sts.miicard.com/api/v1/Claims.svc";
 
 }
