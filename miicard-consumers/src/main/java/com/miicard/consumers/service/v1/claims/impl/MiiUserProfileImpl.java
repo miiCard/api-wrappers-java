@@ -33,6 +33,7 @@ import com.miicard.consumers.service.v1.claims.api.PostalAddress;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="CardImageUrl" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="DateOfBirth" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="EmailAddresses" type="{http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api}ArrayOfEmailAddress" minOccurs="0"/>
  *         &lt;element name="FirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="HasPublicProfile" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
@@ -62,6 +63,7 @@ import com.miicard.consumers.service.v1.claims.api.PostalAddress;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MiiUserProfile", propOrder = {
     "cardImageUrl",
+    "dateOfBirth",
     "emailAddresses",
     "firstName",
     "hasPublicProfile",
@@ -85,6 +87,10 @@ public class MiiUserProfileImpl implements MiiUserProfile {
 
     @XmlElement(name = "CardImageUrl", nillable = true)
     protected String cardImageUrl;
+    
+    @XmlElement(name = "DateOfBirth", nillable = true)
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar dateOfBirth;
     
     @XmlElement(name = "EmailAddresses", nillable = true)
     protected ArrayOfEmailAddress emailAddresses;
@@ -335,6 +341,38 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     	try 
     	{
 			this.lastVerified = DatatypeFactory.newInstance().newXMLGregorianCalendar(g);
+		} 
+    	catch (DatatypeConfigurationException e) 
+    	{
+		}
+    }
+    
+    /**
+     * Gets the value of the dateOfBirth property.
+     * 
+     * @return possible object is
+     * {@link String }
+     *     
+     */
+    public final Date getDateOfBirth() {
+        return dateOfBirth.toGregorianCalendar().getTime();
+    }
+
+    /**
+     * Sets the value of the dateOfBirth property.
+     * 
+     * @param value allowed object is
+     * {@link String }
+     *     
+     */
+    public final void setDateOfBirth(
+    		final Date value) {
+    	GregorianCalendar g = new GregorianCalendar();
+    	g.setTime(value);
+    	
+    	try 
+    	{
+			this.dateOfBirth = DatatypeFactory.newInstance().newXMLGregorianCalendar(g);
 		} 
     	catch (DatatypeConfigurationException e) 
     	{

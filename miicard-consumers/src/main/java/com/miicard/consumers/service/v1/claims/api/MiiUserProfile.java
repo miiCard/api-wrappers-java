@@ -58,6 +58,13 @@ public interface MiiUserProfile {
 	 *     
 	 */
 	Date getLastVerified();
+	
+	/**
+	 * Gets the date of birth of the miiCard member, assuming miiCard has been able to verify it and the
+	 * member has agreed to share it.
+	 * @return The miiCard member's verified date of birth, or null if not possible.
+	 */
+	Date getDateOfBirth();
 
 	/**
 	 * Gets the value of the middleName property.
