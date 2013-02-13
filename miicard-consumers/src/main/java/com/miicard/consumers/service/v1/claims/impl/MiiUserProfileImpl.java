@@ -355,7 +355,14 @@ public class MiiUserProfileImpl implements MiiUserProfile {
      *     
      */
     public final Date getDateOfBirth() {
-        return dateOfBirth.toGregorianCalendar().getTime();
+		if (dateOfBirth != null)
+		{
+        	return dateOfBirth.toGregorianCalendar().getTime();
+		}
+		else
+		{
+			return null;
+		}
     }
 
     /**
