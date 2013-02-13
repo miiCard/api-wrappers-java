@@ -225,6 +225,7 @@ public class Prettify {
         toReturn += renderFact("First name", profile.getFirstName());
         toReturn += renderFact("Middle name", profile.getMiddleName());
         toReturn += renderFact("Last name", profile.getLastName());
+        toReturn += renderFact("Date of birth", profile.getDateOfBirth());
         toReturn += renderFact("Identity verified?", profile.isIdentityAssured());
         toReturn += renderFact("Identity last verified?", profile.getLastVerified());
         toReturn += renderFact("Has a public profile?", profile.hasPublicProfile());
