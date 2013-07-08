@@ -72,6 +72,7 @@ public class HarnessViewModel {
     
     private String identitySnapshotDetailsId = "";
     private String identitySnapshotId = "";
+    private String identitySnapshotPdfId = "";
 
     /**
      * Gets the Consumer Key.
@@ -347,5 +348,13 @@ public class HarnessViewModel {
     
     public final void setIdentitySnapshotId(String identitySnapshotId){
     	this.identitySnapshotId = identitySnapshotId;
+    }
+    
+    public final String getIdentitySnapshotPdfId() {
+    	return this.identitySnapshotPdfId;
+    }
+    
+    public final void setIdentitySnapshotPdfId(String identitySnapshotPdfId) {
+    	this.identitySnapshotPdfId = identitySnapshotPdfId;
     }
 }

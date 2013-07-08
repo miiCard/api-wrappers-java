@@ -12,6 +12,8 @@ import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfArrayOfIdent
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfIdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfMiiUserProfile;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfBoolean;
+import com.miicard.consumers.service.v1.claims.transactional.impl.ArrayOfIdentitySnapshotDetails;
+import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapshotDetailsImpl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -141,11 +143,18 @@ public class MiiCardOAuthClaimsService extends MiiCardOAuthServiceBase {
     	MiiApiResponseOfArrayOfIdentitySnapshotDetails response
     		= this.getAuthorisedService().getIdentitySnapshotDetails(snapshotId);
     	    	
+    	ArrayOfIdentitySnapshotDetails data = response.getData();
+    	List<IdentitySnapshotDetailsImpl> details = null;
+    	if (data != null)
+    	{
+    		details = data.getIdentitySnapshotDetails();
+    	}
+    	
     	return new MiiApiResponse<List<? extends IdentitySnapshotDetails>>(
 	                response.getStatus(), 
 	                response.getErrorCode(), 
 	                response.getErrorMessage(), 
-	                response.getData().getIdentitySnapshotDetails(),
+	                details,
 	                response.getIsTestUser()
     			);
     }
@@ -165,6 +174,15 @@ public class MiiCardOAuthClaimsService extends MiiCardOAuthServiceBase {
                 response.getIsTestUser()
 			);
 	}
+
+    public final InputStream getIdentitySnapshotPdf(
+    		final String snapshotId)
+            throws MiiCardSigningException {
+    	
+    	byte[] response = this.getAuthorisedService().getIdentitySnapshotPdf(snapshotId);
+    	
+    	return new ByteArrayInputStream(response);
+    }
     
     /**
      * Returns a graphical representation of a user's identity assurance status,

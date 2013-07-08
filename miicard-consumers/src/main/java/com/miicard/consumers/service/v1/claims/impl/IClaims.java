@@ -60,6 +60,14 @@ public interface IClaims {
     MiiApiResponseOfIdentitySnapshot getIdentitySnapshot(
         @WebParam(name = "snapshotId", targetNamespace = "http://tempuri.org/")
         String snapshotId);
+    
+    @WebMethod(operationName = "GetIdentitySnapshotPdf", action = "http://tempuri.org/IClaims/GetIdentitySnapshotPdf")
+    @WebResult(name = "GetIdentitySnapshotPdfResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetIdentitySnapshotPdf", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshotPdf")
+    @ResponseWrapper(localName = "GetIdentitySnapshotPdfResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshotPdfResponse")
+    byte[] getIdentitySnapshotPdf(
+        @WebParam(name = "snapshotId", targetNamespace = "http://tempuri.org/")
+        String snapshotId);
 
     /**
      * @param socialAccountId

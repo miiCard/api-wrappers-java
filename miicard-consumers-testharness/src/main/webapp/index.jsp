@@ -1,6 +1,7 @@
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.miicard.consumers.testharness.Prettify"%>
 <%@page import="com.miicard.consumers.service.v1.MiiCardOAuthClaimsService"%>
+<%@page import="org.apache.commons.io.IOUtils"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -72,6 +73,17 @@
         		&& !viewModel.getIdentitySnapshotId().isEmpty())
         {
         	viewModel.setLastGetIdentitySnapshotResult(Prettify.renderResponse(service.getIdentitySnapshot(viewModel.getIdentitySnapshotId())));
+        }
+        else if (action.equals("get-identity-snapshot-pdf") 
+        		&& viewModel.getIdentitySnapshotPdfId() != null
+        		&& !viewModel.getIdentitySnapshotPdfId().isEmpty())
+        {
+        	response.setContentType("application/pdf");
+        	response.setHeader("Content-Disposition", "attachment; filename=\"" + viewModel.getIdentitySnapshotPdfId() + "\".pdf");
+        	response.resetBuffer();
+        	IOUtils.copy(service.getIdentitySnapshotPdf(viewModel.getIdentitySnapshotPdfId()), response.getOutputStream());
+        	
+        	return;
         }
     }
     else if (action != null) {
@@ -238,6 +250,21 @@
                 <p><%= viewModel.getLastGetIdentitySnapshotResult() %></p>
                 <% } %>
                 <button type="submit" name="btn-invoke" value="get-identity-snapshot" class="btn btn-large">Invoke method &raquo;</button>
+            </div>
+        </div>
+        
+        <div class="page-header">
+            <h2>GetIdentitySnapshotPdf
+            <small>Retrieve a PDF of a created snapshot of a miiCard member's identity</small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h3>Parameters</h3>
+                <label for="identitySnapshotPdfId">Snapshot ID</label>
+                <input type="text" name="identitySnapshotPdfId" value="<%= viewModel.getIdentitySnapshotPdfId() %>" />
+                
+                <button type="submit" name="btn-invoke" value="get-identity-snapshot-pdf" class="btn btn-large">Invoke method &raquo;</button>
             </div>
         </div>
     </form>
