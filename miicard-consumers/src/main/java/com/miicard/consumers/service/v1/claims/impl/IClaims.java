@@ -45,6 +45,18 @@ public interface IClaims {
         @WebParam(name = "type", targetNamespace = "http://tempuri.org/")
         String type);
     
+    /**
+     * @param type
+     * @return returns byte[]
+     */
+    @WebMethod(operationName = "GetCardImage", action = "http://tempuri.org/IClaims/GetCardImage")
+    @WebResult(name = "GetCardImageResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetCardImage", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetCardImage")
+    @ResponseWrapper(localName = "GetCardImageResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetCardImageResponse")
+    byte[] getCardImage(
+        @WebParam(name = "configuration", targetNamespace = "http://tempuri.org/")
+        CardImageConfiguration configuration);    
+    
     @WebMethod(operationName = "GetIdentitySnapshotDetails", action = "http://tempuri.org/IClaims/GetIdentitySnapshotDetails")
     @WebResult(name = "GetIdentitySnapshotDetailsResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "GetIdentitySnapshotDetails", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetIdentitySnapshotDetails")

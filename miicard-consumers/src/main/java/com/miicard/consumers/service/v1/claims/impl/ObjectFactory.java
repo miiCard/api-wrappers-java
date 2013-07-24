@@ -68,7 +68,7 @@ class ObjectFactory {
     private final static QName _ArrayOfEmailAddress_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "ArrayOfEmailAddress");
     private final static QName _MiiApiResponseOfArrayOfIdentitySnapshotDetails_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfArrayOfIdentitySnapshotDetails");
     private final static QName _MiiApiResponseOfIdentitySnapshot_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfIdentitySnapshot");
-
+    private final static QName _CardImageConfiguration_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "CardImageConfiguration");
     
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.miicard.consumers.service.v1.claims
@@ -175,6 +175,10 @@ class ObjectFactory {
     public final AssuranceImageResponse createAssuranceImageResponse() {
         return new AssuranceImageResponse();
     }
+    
+    public final GetCardImageResponse createGetCardImageResponse() {
+    	return new GetCardImageResponse();
+    }
 
     /**
      * Create an instance of {@link IsSocialAccountAssuredResponse }
@@ -200,6 +204,10 @@ class ObjectFactory {
         return new AssuranceImage();
     }
 
+    public final GetCardImage createGetCardImage() {
+    	return new GetCardImage();
+    }
+    
     /**
      * Create an instance of {@link ClaimImpl }
      * 
@@ -694,5 +702,15 @@ class ObjectFactory {
     			MiiApiResponseOfIdentitySnapshot.class, 
     			null, 
     			value);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "CardImageConfiguration")
+    public final JAXBElement<CardImageConfiguration> createCardImageConfiguration(final CardImageConfiguration value) {
+    	return new JAXBElement<CardImageConfiguration>(
+    			_CardImageConfiguration_QNAME,
+    			CardImageConfiguration.class,
+    			null,
+    			value
+    			);
     }
 }

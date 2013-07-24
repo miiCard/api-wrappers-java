@@ -6,6 +6,7 @@ import com.miicard.consumers.service.v1.MiiApiResponse;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
+import com.miicard.consumers.service.v1.claims.impl.CardImageConfiguration;
 import com.miicard.consumers.service.v1.claims.impl.Claims;
 import com.miicard.consumers.service.v1.claims.impl.IClaims;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfArrayOfIdentitySnapshotDetails;
@@ -205,6 +206,19 @@ public class MiiCardOAuthClaimsService extends MiiCardOAuthServiceBase {
     	
     	return new ByteArrayInputStream(response);
     }
+    
+    /**
+     * Returns a card-shaped representation of a user's identity assurance status,
+     * in PNG format.
+     */
+    public final InputStream getCardImage(
+    		final CardImageConfiguration configuration)
+            throws MiiCardSigningException {
+    	
+    	byte[] response = this.getAuthorisedService().getCardImage(configuration);
+    	
+    	return new ByteArrayInputStream(response);
+    }    
     
     /**
      * Gets the Authorised Service.
