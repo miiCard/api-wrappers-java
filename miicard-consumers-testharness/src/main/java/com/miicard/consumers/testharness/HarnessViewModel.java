@@ -73,6 +73,12 @@ public class HarnessViewModel {
     private String identitySnapshotDetailsId = "";
     private String identitySnapshotId = "";
     private String identitySnapshotPdfId = "";
+    
+    private boolean showCardImage;
+    private String cardImageSnapshotId = "";
+    private String cardImageFormat = "";
+    private boolean cardImageShowEmailAddress;
+    private boolean cardImageShowPhoneNumber;
 
     /**
      * Gets the Consumer Key.
@@ -357,4 +363,44 @@ public class HarnessViewModel {
     public final void setIdentitySnapshotPdfId(String identitySnapshotPdfId) {
     	this.identitySnapshotPdfId = identitySnapshotPdfId;
     }
+
+	public boolean getShowCardImage() {
+		return showCardImage;
+	}
+
+	public void setShowCardImage(boolean showCardImage) {
+		this.showCardImage = showCardImage;
+	}
+
+	public String getCardImageSnapshotId() {
+		return cardImageSnapshotId;
+	}
+
+	public void setCardImageSnapshotId(String cardImageSnapshotId) {
+		this.cardImageSnapshotId = cardImageSnapshotId;
+	}
+
+	public boolean getCardImageShowEmailAddress() {
+		return cardImageShowEmailAddress;
+	}
+
+	public void setCardImageShowEmailAddress(boolean cardImageShowEmailAddress) {
+		this.cardImageShowEmailAddress = cardImageShowEmailAddress;
+	}
+
+	public String getCardImageFormat() {
+		return cardImageFormat;
+	}
+
+	public void setCardImageFormat(String cardImageFormat) {
+		this.cardImageFormat = cardImageFormat;
+	}
+
+	public boolean getCardImageShowPhoneNumber() {
+		return cardImageShowPhoneNumber;
+	}
+
+	public void setCardImageShowPhoneNumber(boolean cardImageShowPhoneNumber) {
+		this.cardImageShowPhoneNumber = cardImageShowPhoneNumber;
+	}
 }

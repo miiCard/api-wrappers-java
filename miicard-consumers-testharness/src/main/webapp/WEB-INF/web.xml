@@ -4,9 +4,17 @@
         <servlet-name>ImageServlet</servlet-name>
         <servlet-class>com.miicard.consumers.testharness.ImageServlet</servlet-class>
     </servlet>
+    <servlet>
+    	<servlet-name>CardImageServlet</servlet-name>
+        <servlet-class>com.miicard.consumers.testharness.CardImageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/assuranceimage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CardImageServlet</servlet-name>
+        <url-pattern>/cardimage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

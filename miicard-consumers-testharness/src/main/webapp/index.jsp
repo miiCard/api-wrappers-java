@@ -64,6 +64,9 @@
         		&& !viewModel.getAssuranceImageType().isEmpty()) {
         	viewModel.setShowAssuranceImage(true);
         }
+        else if (action.equals("card-image")) {
+        	viewModel.setShowCardImage(true);
+        }
         else if (action.equals("get-identity-snapshot-details"))
         {
         	viewModel.setLastGetIdentitySnapshotDetailsResult(Prettify.renderResponse(service.getIdentitySnapshotDetails(viewModel.getIdentitySnapshotDetailsId())));
@@ -214,6 +217,40 @@
                 <button type="submit" name="btn-invoke" value="assurance-image" class="btn btn-large">Invoke method &raquo;</button>
             </div>
         </div>
+        
+		<div class="page-header">
+            <h2>GetCardImage
+            <small>Renders a card-image representation of LOA</small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h3>Parameters</h3>
+                <label for="cardImageSnapshotId">Snapshot ID (optional)</label>
+                <input type="text" name="card-image-snapshot-id" value="<%= viewModel.getCardImageSnapshotId() %>" />
+
+                <label for="cardImageFormat">Format (card, signature)</label>
+                <input type="text" name="card-image-format" value="<%= viewModel.getCardImageFormat() %>" />
+
+                <% if (viewModel.getCardImageShowEmailAddress()) { %>
+                  <label class="checkbox"><input type="checkbox" name="card-image-show-email-address" checked="checked" value="on" /> Show email address</label>
+                <% } else { %>
+                  <label class="checkbox"><input type="checkbox" name="card-image-show-email-address" /> Show email address</label>
+                <% } %> 
+
+                <% if (viewModel.getCardImageShowPhoneNumber()) { %>
+                  <label class="checkbox"><input type="checkbox" name="card-image-show-phone-number" checked="checked" value="on" /> Show phone number</label>
+                <% } else { %>
+                  <label class="checkbox"><input type="checkbox" name="card-image-show-phone-number" /> Show phone number</label>
+                <% } %>
+
+                <h4>Result</h4>
+                <% if (viewModel.getShowCardImage()) { %>
+                <p><img src="cardimage?oauth-consumer-key=<%= URLEncoder.encode(viewModel.getConsumerKey(), "UTF8") %>&oauth-consumer-secret=<%= URLEncoder.encode(viewModel.getConsumerSecret(), "UTF8") %>&oauth-access-token=<%= URLEncoder.encode(viewModel.getAccessToken(), "UTF8") %>&oauth-access-token-secret=<%= URLEncoder.encode(viewModel.getAccessTokenSecret(), "UTF8") %>&snapshot-id=<%= viewModel.getCardImageSnapshotId() %>&format=<%= viewModel.getCardImageFormat() %>&show-email-address=<%= Boolean.toString(viewModel.getCardImageShowEmailAddress()) %>&show-phone-number=<%= Boolean.toString(viewModel.getCardImageShowPhoneNumber()) %>" /></p>
+                <% } %>
+                <button type="submit" name="btn-invoke" value="card-image" class="btn btn-large">Invoke method &raquo;</button>
+            </div>
+        </div>        
         
         <div class="page-header">
             <h2>GetIdentitySnapshotDetails
