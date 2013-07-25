@@ -5,6 +5,7 @@ import com.miicard.consumers.service.v1.MiiCardOAuthClaimsService;
 import com.miicard.consumers.service.v1.claims.impl.CardImageConfiguration;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class CardImageServlet extends HttpServlet {
 			final HttpServletRequest request,
 			final HttpServletResponse response)
 					throws ServletException, IOException {
-        
+        		
 		response.setContentType("image/png");
         
         String consumerKey 
@@ -55,10 +56,10 @@ public class CardImageServlet extends HttpServlet {
         	= request.getParameter("format");
         
         boolean showEmailAddress
-        	= request.getParameter("show-email-address").equals("True");
+        	= request.getParameter("show-email-address").equals("true");
         
         boolean showPhoneNumber
-        	= request.getParameter("show-phone-number").equals("True");
+        	= request.getParameter("show-phone-number").equals("true");
         
         javax.servlet.ServletOutputStream out 
         	= response.getOutputStream();
@@ -82,8 +83,6 @@ public class CardImageServlet extends HttpServlet {
         		configuration.setSnapshotId(snapshotId);
         		configuration.setShowEmailAddress(showEmailAddress);
         		configuration.setShowPhoneNumber(showPhoneNumber);
-        		
-        		response.addHeader("X-ShowEmailAddress", Boolean.toString(showEmailAddress));
         		
         		IOUtils.copy(service.getCardImage(configuration), out);
         	}

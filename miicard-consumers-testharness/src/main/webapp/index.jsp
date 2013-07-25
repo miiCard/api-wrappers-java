@@ -227,21 +227,21 @@
             <div class="span12">
                 <h3>Parameters</h3>
                 <label for="cardImageSnapshotId">Snapshot ID (optional)</label>
-                <input type="text" name="card-image-snapshot-id" value="<%= viewModel.getCardImageSnapshotId() %>" />
+                <input type="text" name="cardImageSnapshotId" value="<%= viewModel.getCardImageSnapshotId() %>" />
 
                 <label for="cardImageFormat">Format (card, signature)</label>
-                <input type="text" name="card-image-format" value="<%= viewModel.getCardImageFormat() %>" />
+                <input type="text" name="cardImageFormat" value="<%= viewModel.getCardImageFormat() %>" />
 
                 <% if (viewModel.getCardImageShowEmailAddress()) { %>
-                  <label class="checkbox"><input type="checkbox" name="card-image-show-email-address" checked="checked" value="on" /> Show email address</label>
+                  <label class="checkbox"><input type="checkbox" name="cardImageShowEmailAddress" checked="checked" value="on" /> Show email address</label>
                 <% } else { %>
-                  <label class="checkbox"><input type="checkbox" name="card-image-show-email-address" /> Show email address</label>
+                  <label class="checkbox"><input type="checkbox" name="cardImageShowEmailAddress" /> Show email address</label>
                 <% } %> 
 
                 <% if (viewModel.getCardImageShowPhoneNumber()) { %>
-                  <label class="checkbox"><input type="checkbox" name="card-image-show-phone-number" checked="checked" value="on" /> Show phone number</label>
+                  <label class="checkbox"><input type="checkbox" name="cardImageShowPhoneNumber" checked="checked" value="on" /> Show phone number</label>
                 <% } else { %>
-                  <label class="checkbox"><input type="checkbox" name="card-image-show-phone-number" /> Show phone number</label>
+                  <label class="checkbox"><input type="checkbox" name="cardImageShowPhoneNumber" /> Show phone number</label>
                 <% } %>
 
                 <h4>Result</h4>
