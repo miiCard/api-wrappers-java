@@ -208,6 +208,10 @@ class ObjectFactory {
     	return new GetCardImage();
     }
     
+    public final CardImageConfiguration createCardImageConfiguration() {
+    	return new CardImageConfiguration();
+    }
+    
     /**
      * Create an instance of {@link ClaimImpl }
      * 

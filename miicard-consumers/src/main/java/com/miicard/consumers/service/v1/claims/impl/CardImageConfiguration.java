@@ -7,20 +7,20 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CardImageConfiguration", propOrder = {
-	"snapshotId",
+	"format",
 	"showEmailAddress",
 	"showPhoneNumber",
-	"format"
+	"snapshotId"
 })
 public class CardImageConfiguration {
 
     @XmlElement(name = "SnapshotId", nillable = true)
 	protected String snapshotId;
     
-    @XmlElement(name = "ShowEmailAddress")
+    @XmlElement(name = "ShowEmailAddress", nillable = true)
     protected Boolean showEmailAddress;
     
-    @XmlElement(name = "ShowPhoneNumber")
+    @XmlElement(name = "ShowPhoneNumber", nillable = true)
     protected Boolean showPhoneNumber;
     
     @XmlElement(name = "Format", nillable = true)
