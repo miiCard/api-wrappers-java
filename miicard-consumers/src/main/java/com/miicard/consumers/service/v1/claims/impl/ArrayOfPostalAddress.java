@@ -26,11 +26,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ArrayOfPostalAddress", propOrder = {
     "postalAddress"
 })
-class ArrayOfPostalAddress {
+public class ArrayOfPostalAddress {
 
     @XmlElement(name = "PostalAddress", nillable = true)
     protected List<PostalAddressImpl> postalAddress;
@@ -64,5 +65,9 @@ class ArrayOfPostalAddress {
         }
         
     	return this.postalAddress;
+    }
+    
+    public final void setPostalAddresses(final List<PostalAddressImpl> addresses) {
+    	this.postalAddress = addresses;
     }
 }

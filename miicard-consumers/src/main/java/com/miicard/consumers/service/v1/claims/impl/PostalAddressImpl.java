@@ -33,6 +33,7 @@ import com.miicard.consumers.service.v1.claims.api.PostalAddress;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PostalAddress", propOrder = {
     "city",
@@ -44,7 +45,7 @@ import com.miicard.consumers.service.v1.claims.api.PostalAddress;
     "line2",
     "region"
 })
-class PostalAddressImpl extends ClaimImpl implements PostalAddress {
+public class PostalAddressImpl extends ClaimImpl implements PostalAddress {
 
     @XmlElement(name = "City", nillable = true)
     protected String city;

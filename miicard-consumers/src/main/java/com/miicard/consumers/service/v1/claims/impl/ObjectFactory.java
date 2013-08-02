@@ -28,8 +28,9 @@ import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapsh
  * provided in this class.
  * 
  */
+@SuppressWarnings("restriction")
 @XmlRegistry
-class ObjectFactory {
+public class ObjectFactory {
 
     private final static QName _AnyURI_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyURI");
     private final static QName _MiiApiCallStatus_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiCallStatus");
@@ -50,6 +51,7 @@ class ObjectFactory {
     private final static QName _MiiApiResponseOfMiiUserProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfMiiUserProfile");
     private final static QName _AnyType_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyType");
     private final static QName _ArrayOfIdentity_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "ArrayOfIdentity");
+    private final static QName _ArrayOfQualification_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "ArrayOfQualification");
     private final static QName _UnsignedInt_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "unsignedInt");
     private final static QName _Int_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "int");
     private final static QName _ArrayOfPhoneNumber_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "ArrayOfPhoneNumber");
@@ -62,12 +64,16 @@ class ObjectFactory {
     private final static QName _Guid_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "guid");
     private final static QName _Duration_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "duration");
     private final static QName _Identity_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "Identity");
+    private final static QName _Qualification_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "Qualification");
+    private final static QName _QualificationType_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "QualificationType");
     private final static QName _String_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "string");
     private final static QName _MiiApiResponseOfboolean_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfboolean");
     private final static QName _UnsignedLong_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "unsignedLong");
     private final static QName _ArrayOfEmailAddress_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "ArrayOfEmailAddress");
     private final static QName _MiiApiResponseOfArrayOfIdentitySnapshotDetails_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfArrayOfIdentitySnapshotDetails");
     private final static QName _MiiApiResponseOfIdentitySnapshot_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfIdentitySnapshot");
+    private final static QName _MiiApiResponseOfMiiFinancialData_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfMiiFinancialData");
+    private final static QName _MiiApiResponseOfFinancialRefreshStatus_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "MiiApiResponseOfFinancialRefreshStatus");
     private final static QName _CardImageConfiguration_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", "CardImageConfiguration");
     
     /**
@@ -487,6 +493,13 @@ class ObjectFactory {
         
     	return new JAXBElement<ArrayOfIdentity>(_ArrayOfIdentity_QNAME, ArrayOfIdentity.class, null, value);
     }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "ArrayOfQualification")
+    public final JAXBElement<ArrayOfQualification> createArrayOfQualification(
+    		final ArrayOfQualification value) {
+        
+    	return new JAXBElement<ArrayOfQualification>(_ArrayOfQualification_QNAME, ArrayOfQualification.class, null, value);
+    }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Long }{@code >}}
@@ -634,6 +647,20 @@ class ObjectFactory {
         
     	return new JAXBElement<IdentityImpl>(_Identity_QNAME, IdentityImpl.class, null, value);
     }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "Qualification")
+    public final JAXBElement<QualificationImpl> createQualification(
+    		final QualificationImpl value) {
+        
+    	return new JAXBElement<QualificationImpl>(_Qualification_QNAME, QualificationImpl.class, null, value);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "QualificationType")
+    public final JAXBElement<QualificationType> createIdentity(
+    		final QualificationType value) {
+        
+    	return new JAXBElement<QualificationType>(_QualificationType_QNAME, QualificationType.class, null, value);
+    }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
@@ -696,7 +723,7 @@ class ObjectFactory {
     			MiiApiResponseOfArrayOfIdentitySnapshotDetails.class, 
     			null, 
     			value);
-    }
+    } 
     
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "MiiApiResponseOfIdentitySnapshot")
     public final JAXBElement<MiiApiResponseOfIdentitySnapshot> createMiiApiResponseOfIdentitySnapshot(final MiiApiResponseOfIdentitySnapshot value) {
@@ -716,5 +743,27 @@ class ObjectFactory {
     			null,
     			value
     			);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "MiiApiResponseOfMiiFinancialData")
+    public final JAXBElement<MiiApiResponseOfMiiFinancialData> createMiiApiResponseOfMiiFinancialData(
+    		final MiiApiResponseOfMiiFinancialData value) {
+        
+    	return new JAXBElement<MiiApiResponseOfMiiFinancialData>(
+    			_MiiApiResponseOfMiiFinancialData_QNAME, 
+    			MiiApiResponseOfMiiFinancialData.class, 
+    			null, 
+    			value);
+    }   
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api", name = "MiiApiResponseOfFinancialRefreshStatus")
+    public final JAXBElement<MiiApiResponseOfFinancialRefreshStatus> createMiiApiResponseOfFinancialRefreshStatus(
+    		final MiiApiResponseOfFinancialRefreshStatus value) {
+        
+    	return new JAXBElement<MiiApiResponseOfFinancialRefreshStatus>(
+    			_MiiApiResponseOfFinancialRefreshStatus_QNAME, 
+    			MiiApiResponseOfFinancialRefreshStatus.class, 
+    			null, 
+    			value);
     }
 }

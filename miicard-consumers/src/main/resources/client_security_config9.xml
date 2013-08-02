@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwss:JAXRPCSecurity xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
+    <xwss:Service conformance="bsp">
+        <xwss:SecurityConfiguration dumpMessages="true">
+            <xwss:Sign includeTimestamp="true" id="s">
+            	<xwss:X509Token certificateAlias="miicard" valueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" />
+        		<xwss:CanonicalizationMethod disableInclusivePrefix="true"/>  
+        		<xwss:SignatureTarget type="xpath" value="/SOAP-ENV:Envelope/SOAP-ENV:Header/wsse:Security/wsu:Timestamp[1]">
+        			<xwss:Transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+        		</xwss:SignatureTarget>
+            </xwss:Sign>
+        </xwss:SecurityConfiguration>
+    </xwss:Service>
+
+    <xwss:SecurityEnvironmentHandler>
+        com.miicard.consumers.MiiCardSecurityEnvironmentHandler
+    </xwss:SecurityEnvironmentHandler>
+</xwss:JAXRPCSecurity>

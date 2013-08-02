@@ -3,6 +3,7 @@ package com.miicard.consumers.service.v1;
 import com.miicard.consumers.MiiCardSigningException;
 import com.miicard.consumers.ServiceUrls;
 import com.miicard.consumers.service.v1.MiiApiResponse;
+import com.miicard.consumers.service.v1.claims.api.AuthenticationDetails;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
@@ -10,6 +11,7 @@ import com.miicard.consumers.service.v1.claims.impl.CardImageConfiguration;
 import com.miicard.consumers.service.v1.claims.impl.Claims;
 import com.miicard.consumers.service.v1.claims.impl.IClaims;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfArrayOfIdentitySnapshotDetails;
+import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfAuthenticationDetails;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfIdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfMiiUserProfile;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfBoolean;
@@ -38,6 +40,7 @@ import oauth.signpost.http.HttpRequest;
  * @author Paul.ONeill
  * 
  */
+@SuppressWarnings("restriction")
 public class MiiCardOAuthClaimsService extends MiiCardOAuthServiceBase {
     
 	/**
@@ -219,6 +222,22 @@ public class MiiCardOAuthClaimsService extends MiiCardOAuthServiceBase {
     	
     	return new ByteArrayInputStream(response);
     }    
+    
+    public final MiiApiResponse<AuthenticationDetails> getAuthenticationDetails(
+    		final String snapshotId)
+    		throws MiiCardSigningException {
+    	
+		MiiApiResponseOfAuthenticationDetails response
+			= this.getAuthorisedService().getAuthenticationDetails(snapshotId);
+		
+		return new MiiApiResponse<AuthenticationDetails>(
+                response.getStatus(), 
+                response.getErrorCode(), 
+                response.getErrorMessage(), 
+                response.getData(),
+                response.getIsTestUser()
+			);
+	}
     
     /**
      * Gets the Authorised Service.

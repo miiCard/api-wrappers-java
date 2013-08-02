@@ -1,14 +1,25 @@
 package com.miicard.consumers.testharness;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+
 import com.miicard.consumers.service.v1.MiiApiResponse;
 
+import com.miicard.consumers.service.v1.claims.api.AuthenticationDetails;
 import com.miicard.consumers.service.v1.claims.api.EmailAddress;
+import com.miicard.consumers.service.v1.claims.api.GeographicLocation;
 import com.miicard.consumers.service.v1.claims.api.Identity;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
 import com.miicard.consumers.service.v1.claims.api.PhoneNumber;
 import com.miicard.consumers.service.v1.claims.api.PostalAddress;
+import com.miicard.consumers.service.v1.claims.api.Qualification;
+import com.miicard.consumers.service.v1.financial.api.FinancialAccount;
+import com.miicard.consumers.service.v1.financial.api.FinancialProvider;
+import com.miicard.consumers.service.v1.financial.api.FinancialRefreshStatus;
+import com.miicard.consumers.service.v1.financial.api.FinancialTransaction;
+import com.miicard.consumers.service.v1.financial.api.MiiFinancialData;
 
 /**
  * 
@@ -23,8 +34,7 @@ public class Prettify {
 	 * @param response the MiiApiResponse
 	 * @return HTML String of the response.
 	 */
-	public final static String renderResponse(
-			final MiiApiResponse<?> response) {
+	public final static String renderResponse(final MiiApiResponse<?> response, PrettifyConfiguration configuration) {
 		
 		String toReturn = "<div class='response'>";
         
@@ -46,7 +56,7 @@ public class Prettify {
         	{
         		toReturn += "<div class='fact'><h4>[" + ct + "]</h4>";
         		
-        		toReturn += getRenderedObject(obj);
+        		toReturn += getRenderedObject(obj, configuration);
         		
         		toReturn += "</div>";
         		
@@ -55,7 +65,7 @@ public class Prettify {
         }
         else 
         {
-        	toReturn += getRenderedObject(data);
+        	toReturn += getRenderedObject(data, configuration);
         }
         
         toReturn += "</div>";
@@ -63,7 +73,7 @@ public class Prettify {
         return toReturn;
     }
 	
-	private final static String getRenderedObject(Object obj)
+	private final static String getRenderedObject(Object obj, PrettifyConfiguration configuration)
 	{
 		if (obj == null)
 		{
@@ -71,15 +81,27 @@ public class Prettify {
 		}
 		else if (obj instanceof MiiUserProfile)
 		{
-			return Prettify.renderUserProfile((MiiUserProfile) obj); 
+			return Prettify.renderUserProfile((MiiUserProfile) obj, configuration); 
 		}
 		else if (obj instanceof IdentitySnapshotDetails)
 		{
-			return Prettify.renderIdentitySnapshotDetails((IdentitySnapshotDetails) obj);
+			return Prettify.renderIdentitySnapshotDetails((IdentitySnapshotDetails) obj, configuration);
 		}
 		else if (obj instanceof IdentitySnapshot)
 		{
-			return Prettify.renderIdentitySnapshot((IdentitySnapshot) obj);
+			return Prettify.renderIdentitySnapshot((IdentitySnapshot) obj, configuration);
+		}
+		else if (obj instanceof MiiFinancialData)
+		{
+			return Prettify.renderFinancialData((MiiFinancialData) obj, configuration);		
+		}
+		else if (obj instanceof FinancialRefreshStatus)
+		{
+			return Prettify.renderFinancialRefreshStatus((FinancialRefreshStatus) obj, configuration);
+		}
+		else if (obj instanceof AuthenticationDetails)
+		{
+			return Prettify.renderAuthenticationDetails((AuthenticationDetails) obj, configuration);
 		}
 		else
 		{
@@ -190,7 +212,7 @@ public class Prettify {
         
         toReturn += renderFact("Display name", number.getDisplayName());
         toReturn += renderFact("Country code", number.getCountryCode());
-        toReturn += renderFact("National number", number.getNationalNumber());
+        toReturn += renderFact("Nati)onal number", number.getNationalNumber());
         toReturn += renderFact("Is mobile?", number.isMobile());
         toReturn += renderFact("Is primary?", number.isPrimary());
         toReturn += renderFact("Verified?", number.isVerified());
@@ -215,7 +237,7 @@ public class Prettify {
      * @param profile the MiiUserProfile.
      * @return HTML String of the MiiUserProfile.
      */
-    public static String renderUserProfile(MiiUserProfile profile){
+    public static String renderUserProfile(MiiUserProfile profile, PrettifyConfiguration configuration){
         
     	String toReturn = "<div class='fact'>";
         
@@ -226,6 +248,7 @@ public class Prettify {
         toReturn += renderFact("Middle name", profile.getMiddleName());
         toReturn += renderFact("Last name", profile.getLastName());
         toReturn += renderFact("Date of birth", profile.getDateOfBirth());
+        toReturn += renderFact("Age", profile.getAge());
         toReturn += renderFact("Identity verified?", profile.isIdentityAssured());
         toReturn += renderFact("Identity last verified?", profile.getLastVerified());
         toReturn += renderFact("Has a public profile?", profile.hasPublicProfile());
@@ -288,10 +311,21 @@ public class Prettify {
             }
         }
         
+        toReturn += renderFactHeading("Qualifications");
+        ct = 0;
+        
+        if (!profile.getQualifications().isEmpty()) {
+        	for (Qualification qualification : profile.getQualifications()) {
+        		toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
+                toReturn += renderQualification(qualification);
+                toReturn += "</div>";
+        	}
+        }
+        
         if (profile.getPublicProfile() != null) {
         	
         	toReturn += "<div class='fact'>";
-            toReturn += Prettify.renderUserProfile(profile.getPublicProfile());
+            toReturn += Prettify.renderUserProfile(profile.getPublicProfile(), configuration);
             toReturn += "</div>";
         }
         
@@ -307,7 +341,7 @@ public class Prettify {
      * @return HTML representation of the object
      */
     private final static String renderIdentitySnapshotDetails(
-    		final IdentitySnapshotDetails identitySnapshotDetails) {
+    		final IdentitySnapshotDetails identitySnapshotDetails, PrettifyConfiguration configuration) {
         
     	String toReturn = "<div class='fact'>";
     	
@@ -328,17 +362,206 @@ public class Prettify {
      * @return HTML String of the PostalAddress
      */
     private final static String renderIdentitySnapshot(
-    		final IdentitySnapshot identitySnapshot) {
+    		final IdentitySnapshot identitySnapshot, PrettifyConfiguration configuration) {
         
     	String toReturn = "<div class='fact'>";
     	
     	toReturn += renderFactHeading("Snapshot Details");
-    	toReturn += renderIdentitySnapshotDetails(identitySnapshot.getDetails());
+    	toReturn += renderIdentitySnapshotDetails(identitySnapshot.getDetails(), configuration);
     	toReturn += renderFactHeading("Snapshot");
-    	toReturn += renderUserProfile(identitySnapshot.getSnapshot());
+    	toReturn += renderUserProfile(identitySnapshot.getSnapshot(), configuration);
                 
         toReturn += "</div>";
         
         return toReturn;   
+    }
+    
+    private final static String getModestyFilteredAmount(BigDecimal value, PrettifyConfiguration configuration) {
+    	String toReturn = "";
+    	
+    	if (value != null) {
+    		if (configuration.getModestyLimit() == null || value.abs().compareTo(configuration.getModestyLimit()) <= 0) {
+	    		toReturn = String.format("%,.2f", value); 
+	    	}
+	    	else {
+	    		toReturn = "?.??";
+	    	}
+    	}
+    	
+    	return toReturn;
+    }
+    
+    private final static String renderFinancialAccount(final FinancialAccount account, PrettifyConfiguration configuration) {
+    	String toReturn = "<div class='fact'>";
+    	
+    	toReturn += renderFact("Holder", account.getHolder());
+        toReturn += renderFact("Account number", account.getAccountNumber());
+        toReturn += renderFact("Sort code", account.getSortCode());
+        toReturn += renderFact("Account name", account.getAccountName());
+        toReturn += renderFact("Type", account.getType());
+        toReturn += renderFact("Last updated", account.getLastUpdatedUtc());
+        toReturn += renderFact("Currency", account.getCurrencyIso());
+        toReturn += renderFact("Closing balance", getModestyFilteredAmount(account.getClosingBalance(), configuration));
+        toReturn += renderFact("Credits (count)", account.getCreditsCount());
+        toReturn += renderFact("Credits (sum)", getModestyFilteredAmount(account.getCreditsSum(), configuration));
+        toReturn += renderFact("Debits (count)", account.getDebitsCount());
+        toReturn += renderFact("Debits (sum)", getModestyFilteredAmount(account.getDebitsSum(), configuration));
+
+        toReturn += renderFactHeading("Transactions");
+        
+        toReturn += "<table class='table table-striped table-condensed table-hover'><thead><tr><th>Date</th><th>Description</th><th class='r'>Credit</th><th class='r'>Debit</th></tr></thead><tbody>";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        
+        for (FinancialTransaction transaction : account.getTransactions())
+        {
+        	String desc = transaction.getDescription();
+        	if (desc == null) {
+        		desc = "[None]";
+        	}
+        	
+        	String amountCredited = "";
+        	if (transaction.getAmountCredited() != null) {
+        		amountCredited = getModestyFilteredAmount(transaction.getAmountCredited(), configuration);
+        	}
+        	
+        	String amountDebited = "";
+        	if (transaction.getAmountDebited() != null) {
+        		amountDebited = getModestyFilteredAmount(transaction.getAmountDebited(), configuration);
+        	}
+        	
+        	String dateFormatted = dateFormat.format(transaction.getDate());
+        	
+        	toReturn += "<tr><td>" + dateFormatted + "</td><td title='ID: " + transaction.getID() + "'>" + transaction.getDescription() +"</td><td class='r'>" + amountCredited + "</td><td class='r d'>" + amountDebited + "</td></tr>";
+        }
+        
+        toReturn += "</tbody></table>";
+        
+    	toReturn += "</div>";
+    	return toReturn;
+    }
+    
+    private final static String renderFinancialProvider(FinancialProvider financialProvider, PrettifyConfiguration configuration)
+    {
+        String toReturn = "<div class='fact'>";
+
+        toReturn += renderFact("Name", financialProvider.getProviderName());
+
+        toReturn += renderFactHeading("Financial Accounts");
+
+        int ct = 0;
+        if (financialProvider.getFinancialAccounts() != null)
+        {
+            for (FinancialAccount account : financialProvider.getFinancialAccounts())
+            {
+                toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
+                toReturn += renderFinancialAccount(account, configuration);
+                toReturn += "</div>";
+            }
+        }
+
+        toReturn += "</div>";
+
+        return toReturn;
+    }
+    
+    private final static String renderFinancialData(MiiFinancialData miiFinancialData, PrettifyConfiguration configuration)
+    {
+        String toReturn = "<div class='fact'>";
+
+        toReturn += "<h2>Financial Data</h2>";
+        toReturn += renderFactHeading("Financial Providers");
+
+        int ct = 0;
+        if (miiFinancialData.getFinancialProviders() != null)
+        {
+            for (FinancialProvider provider : miiFinancialData.getFinancialProviders())
+            {
+                toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
+                toReturn += renderFinancialProvider(provider, configuration);
+                toReturn += "</div>";
+            }
+        }
+
+        toReturn += "</div>";
+
+        return toReturn;
+    }
+    
+    private final static String renderFinancialRefreshStatus(FinancialRefreshStatus financialRefreshStatus, PrettifyConfiguration configuration)
+    {
+        String toReturn = "<div class='fact'>";
+
+    	toReturn += renderFact("State", financialRefreshStatus.getState());
+    	
+        toReturn += "</div>";
+
+        return toReturn;
+    }
+    
+    private final static String renderQualification(Qualification qualification) {
+        String toReturn = "<div class='fact'>";
+
+    	toReturn += renderFact("Type", qualification.getType());
+    	toReturn += renderFact("Title", qualification.getTitle());
+    	toReturn += renderFact("Provider", qualification.getDataProvider());
+    	toReturn += renderFact("Provider URL", qualification.getDataProviderUrl());
+    	
+        toReturn += "</div>";
+
+        return toReturn;
+    }
+    
+    private final static String renderAuthenticationDetails(AuthenticationDetails authenticationDetails, PrettifyConfiguration configuration) {
+        String toReturn = "<div class='fact'>";
+        toReturn += renderFactHeading("Authentication details");
+
+        toReturn += renderFact("Timestamp UTC", authenticationDetails.getAuthenticationTimeUtc());
+        toReturn += renderFact("2FA type", authenticationDetails.getSecondFactorTokenType());
+        toReturn += renderFact("2FA provider", authenticationDetails.getSecondFactorProvider());
+
+        toReturn += "<div class='fact'>";
+        toReturn += renderFactHeading("Locations");
+
+        int ct = 0;
+        if (authenticationDetails.getLocations() != null && !authenticationDetails.getLocations().isEmpty())
+        {
+            for (GeographicLocation location : authenticationDetails.getLocations())
+            {
+                toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
+                toReturn += renderGeographicLocation(location);
+                toReturn += "</div>";
+            }
+        }
+        else
+        {
+            toReturn += "<p><i>No locations</i></p>";
+        }
+
+        toReturn += "</div></div>";
+
+        return toReturn;
+    }
+    
+    private final static String renderGeographicLocation(GeographicLocation location) {
+        String toReturn = "<div class='fact'>";
+
+    	toReturn += renderFact("Provider", location.getLocationProvider());
+    	toReturn += renderFact("Latitude", location.getLatitude());
+    	toReturn += renderFact("Longitude", location.getLongitude());
+    	toReturn += renderFact("Accuracy (metres, est.)", location.getLatLongAccuracyMetres());
+    	
+    	if (location.getApproximateAddress() != null) {
+    		toReturn += renderFactHeading("Approximate postal address");
+    		
+    		toReturn += renderAddress(location.getApproximateAddress());
+    	}
+    	else {
+    		toReturn += renderFact("Approximate postal address", null);
+    	}
+    	
+        toReturn += "</div>";
+
+        return toReturn;    	
     }
 }

@@ -26,11 +26,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ArrayOfIdentity", propOrder = {
     "identity"
 })
-class ArrayOfIdentity {
+public class ArrayOfIdentity {
 
     @XmlElement(name = "Identity", nillable = true)
     protected List<IdentityImpl> identity;
@@ -64,5 +65,9 @@ class ArrayOfIdentity {
         }
         
     	return this.identity;
+    }
+    
+    public final void setIdentities(final List<IdentityImpl> value) {
+    	this.identity = value;
     }
 }

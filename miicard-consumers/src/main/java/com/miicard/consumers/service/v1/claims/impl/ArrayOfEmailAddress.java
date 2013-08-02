@@ -26,37 +26,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ArrayOfEmailAddress", propOrder = {
     "emailAddress"
 })
-class ArrayOfEmailAddress {
+public class ArrayOfEmailAddress {
 	
 	@XmlElement(name = "EmailAddress", nillable = true)
     protected List<EmailAddressImpl> emailAddress;
 
-    /**
-     * Gets the value of the emailAddress property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the emailAddress property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmailAddress().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link EmailAddressImpl }
-     * 
-     * 
-     */
     public final List<EmailAddressImpl> getEmailAddress() {
         
     	if (emailAddress == null) {
@@ -64,5 +43,9 @@ class ArrayOfEmailAddress {
         }
         
     	return this.emailAddress;
+    }
+    
+    public final void setEmailAddresses(final List<EmailAddressImpl> emailAddresses) {
+    	this.emailAddress = emailAddresses;
     }
 }

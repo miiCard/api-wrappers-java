@@ -7,78 +7,39 @@ package com.miicard.consumers.testharness;
  */
 public class HarnessViewModel {
 	
-	/**
-	 * String of the Consumer Key.
-	 */
 	private String consumerKey = "";
-	
-	/**
-	 * String of the Consumer Secret.
-	 */
 	private String consumerSecret = "";
-    
-	/**
-	 * String of the Access Token.
-	 */
-	private String accessToken = "";
-    
-	/**
-	 * String of the Access Token Secret.
-	 */
+    private String accessToken = "";
     private String accessTokenSecret = "";
-    
-    /**
-     * String of the result of the last getClaims.
-     */
     private String lastGetClaimsResult;
-    
-    /**
-     * String of the result of the last isUserAssuredResult.
-     */
     private String lastIsUserAssuredResult;
-    
-    /**
-     * String of the result of the last isSocialAccountAssured.
-     */
     private String lastIsSocialAccountAssuredResult;
-    
     private String lastGetIdentitySnapshotDetailsResult;
     private String lastGetIdentitySnapshotResult;
-    
-    /**
-     * Boolean of show Assurance image.
-     */
+    private String lastGetFinancialTransactionsResult;
     private boolean showAssuranceImage;
-    
-    /**
-     * String of the Assurance image type.
-     */
     private String assuranceImageType = "";
-    
-    /**
-     * String of the Social Account ID.
-     */
     private String socialAccountId = "";
-    
-    /**
-     * String of the Social Account Type.
-     */
     private String socialAccountType = "";
-    
-    /**
-     * Boolean of if show OAuth details is required.
-     */
     private boolean showOAuthDetailsRequiredError;
-    
-    private String identitySnapshotDetailsId = "";
+    private String identitySnapshotDetailsSnapshotId = "";
     private String identitySnapshotId = "";
     private String identitySnapshotPdfId = "";
-    
+    private String authenticationDetailsSnapshotId = "";
     private boolean showCardImage;
     private String cardImageSnapshotId = "";
     private String cardImageFormat = "";
     private boolean cardImageShowEmailAddress;
     private boolean cardImageShowPhoneNumber;
+    private String financialDataModestyLimit = "100";
+    private String lastIsRefreshInProgressResult;
+    private String lastRefreshFinancialDataResult;
+    private String lastGetAuthenticationDetailsResult;
+    
+    private String directoryCriterion;
+    private String directoryCriterionValue = "";
+    private Boolean directoryCriterionValueHashed = false;
+    private String lastDirectorySearchResult;
 
     /**
      * Gets the Consumer Key.
@@ -340,12 +301,12 @@ public class HarnessViewModel {
     		= showOAuthDetailsRequiredError;
     }
     
-    public final String getIdentitySnapshotDetailsId() {
-    	return this.identitySnapshotDetailsId;    	
+    public final String getIdentitySnapshotDetailsSnapshotId() {
+    	return this.identitySnapshotDetailsSnapshotId;    	
     }
     
-    public final void setIdentitySnapshotDetailsId(String identitySnapshotDetailsId){
-    	this.identitySnapshotDetailsId = identitySnapshotDetailsId;
+    public final void setIdentitySnapshotDetailsSnapshotId(String identitySnapshotDetailsId){
+    	this.identitySnapshotDetailsSnapshotId = identitySnapshotDetailsId;
     }
     
     public final String getIdentitySnapshotId() {
@@ -403,4 +364,88 @@ public class HarnessViewModel {
 	public void setCardImageShowPhoneNumber(boolean cardImageShowPhoneNumber) {
 		this.cardImageShowPhoneNumber = cardImageShowPhoneNumber;
 	}
+
+	public String getLastGetFinancialTransactionsResult() {
+		return lastGetFinancialTransactionsResult;
+	}
+
+	public void setLastGetFinancialTransactionResult(String lastGetFinancialDataResult) {
+		this.lastGetFinancialTransactionsResult = lastGetFinancialDataResult;
+	}
+	
+	public String getFinancialDataModestyLimit() {
+		return this.financialDataModestyLimit;
+	}
+	
+	public void setFinancialDataModestyLimit(final String value) {
+		this.financialDataModestyLimit = value;
+	}
+
+	public String getLastIsRefreshInProgressResult() {
+		return lastIsRefreshInProgressResult;
+	}
+
+	public void setLastIsRefreshInProgressResult(
+			String lastIsRefreshInProgressResult) {
+		this.lastIsRefreshInProgressResult = lastIsRefreshInProgressResult;
+	}
+
+	public String getLastRefreshFinancialDataResult() {
+		return lastRefreshFinancialDataResult;
+	}
+
+	public void setLastRefreshFinancialDataResult(
+			String lastRefreshFinancialDataResult) {
+		this.lastRefreshFinancialDataResult = lastRefreshFinancialDataResult;
+	}
+
+	public String getAuthenticationDetailsSnapshotId() {
+		return authenticationDetailsSnapshotId;
+	}
+
+	public void setAuthenticationDetailsSnapshotId(
+			String authenticationDetailsSnapshotId) {
+		this.authenticationDetailsSnapshotId = authenticationDetailsSnapshotId;
+	}
+
+	public String getLastGetAuthenticationDetailsResult() {
+		return lastGetAuthenticationDetailsResult;
+	}
+
+	public void setLastGetAuthenticationDetailsResult(
+			String lastGetAuthenticationDetailsResult) {
+		this.lastGetAuthenticationDetailsResult = lastGetAuthenticationDetailsResult;
+	}
+	
+    public String getDirectoryCriterion() {
+    	return this.directoryCriterion;
+    }
+    
+    public void setDirectoryCriterion(final String directoryCriterion) {
+    	this.directoryCriterion = directoryCriterion;
+    }
+    
+    public String getDirectoryCriterionValue() {
+    	return this.directoryCriterionValue;
+    }
+    
+    public void setDirectoryCriterionValue(final String directoryCriterionValue) {
+    	this.directoryCriterionValue = directoryCriterionValue;
+    }
+    
+    public Boolean getDirectoryCriterionValueHashed() {
+    	return this.directoryCriterionValueHashed;
+    }
+    
+    public void setDirectoryCriterionValueHashed(final Boolean value) {
+    	this.directoryCriterionValueHashed = value;
+    }
+    
+    public String getLastDirectorySearchResult() {
+    	return this.lastDirectorySearchResult;
+    }
+    
+    public void setLastDirectorySearchResult(final String directorySearchResult) {
+    	this.lastDirectorySearchResult = directorySearchResult;
+    }
 }

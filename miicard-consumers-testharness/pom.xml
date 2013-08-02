@@ -2,18 +2,23 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.miicard</groupId>
   <artifactId>miicard-consumers-testharness</artifactId>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
   <packaging>war</packaging>
   <dependencies>
   	<dependency>
   		<groupId>com.miicard</groupId>
   		<artifactId>miicard-consumers</artifactId>
-  		<version>1.5.0</version>
+  		<version>1.6.0</version>
   	</dependency>  	  	
   	<dependency>
   		<groupId>commons-io</groupId>
   		<artifactId>commons-io</artifactId>
   		<version>2.2</version>
-  	</dependency>  
+  	</dependency>    
+  	<dependency>
+    	<groupId>oauth.signpost</groupId>
+    	<artifactId>signpost-core</artifactId>
+    	<version>1.2.1.2</version>
+    </dependency>  
   </dependencies>
 </project>

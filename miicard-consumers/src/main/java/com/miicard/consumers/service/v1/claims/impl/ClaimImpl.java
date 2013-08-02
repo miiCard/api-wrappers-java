@@ -27,6 +27,7 @@ import com.miicard.consumers.service.v1.claims.api.Claim;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Claim", propOrder = {
     "verified"

@@ -17,6 +17,7 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
+@SuppressWarnings("restriction")
 @WebService(name = "IClaims", targetNamespace = "http://tempuri.org/")
 @XmlSeeAlso({
     ObjectFactory.class,
@@ -104,4 +105,12 @@ public interface IClaims {
     @RequestWrapper(localName = "IsUserAssured", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.IsUserAssured")
     @ResponseWrapper(localName = "IsUserAssuredResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.IsUserAssuredResponse")
     MiiApiResponseOfBoolean isUserAssured();
+    
+    @WebMethod(operationName = "GetAuthenticationDetails", action = "http://tempuri.org/IClaims/GetAuthenticationDetails")
+    @WebResult(name = "GetAuthenticationDetailsResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetAuthenticationDetails", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetAuthenticationDetails")
+    @ResponseWrapper(localName = "GetAuthenticationDetailsResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.GetAuthenticationDetailsResponse")
+    MiiApiResponseOfAuthenticationDetails getAuthenticationDetails(
+		@WebParam(name = "snapshotId", targetNamespace = "http://tempuri.org/")
+		String snapshotId);
 }

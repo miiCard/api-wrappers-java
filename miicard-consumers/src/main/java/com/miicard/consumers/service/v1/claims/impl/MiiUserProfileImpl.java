@@ -1,6 +1,5 @@
 package com.miicard.consumers.service.v1.claims.impl;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,7 +10,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -21,6 +19,7 @@ import com.miicard.consumers.service.v1.claims.api.Identity;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
 import com.miicard.consumers.service.v1.claims.api.PhoneNumber;
 import com.miicard.consumers.service.v1.claims.api.PostalAddress;
+import com.miicard.consumers.service.v1.claims.api.Qualification;
 
 /**
  * <p>Java class for MiiUserProfile complex type.
@@ -60,8 +59,10 @@ import com.miicard.consumers.service.v1.claims.api.PostalAddress;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MiiUserProfile", propOrder = {
+	"age",
     "cardImageUrl",
     "dateOfBirth",
     "emailAddresses",
@@ -80,11 +81,15 @@ import com.miicard.consumers.service.v1.claims.api.PostalAddress;
     "profileShortUrl",
     "profileUrl",
     "publicProfile",
+    "qualifications",
     "salutation",
     "username"
 })
 public class MiiUserProfileImpl implements MiiUserProfile {
 
+	@XmlElement(name = "Age", nillable = true)
+	protected Integer age;
+	
     @XmlElement(name = "CardImageUrl", nillable = true)
     protected String cardImageUrl;
     
@@ -140,6 +145,9 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     
     @XmlElement(name = "PublicProfile", nillable = true)
     protected MiiUserProfileImpl publicProfile;
+    
+    @XmlElement(name = "Qualifications", nillable = true)
+	private ArrayOfQualification qualifications;
     
     @XmlElement(name = "Salutation", nillable = true)
     protected String salutation;
@@ -602,6 +610,14 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     	this.publicProfile = value;
     }
 
+	public final ArrayOfQualification getArrayOfQualification() {
+		return qualifications;
+	}
+
+	public final void setArrayOfQualification(ArrayOfQualification qualifications) {
+		this.qualifications = qualifications;
+	}
+
     /**
      * Gets the value of the salutation property.
      * 
@@ -648,6 +664,22 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     		final String value) {
         
     	this.username = value;
+    }
+    
+    /**
+     * Gets the value of the age property.
+     * @return
+     */
+    public Integer getAge() {
+    	return age;
+    }
+    
+    /**
+     * Sets the value of the age property.
+     * @param value
+     */
+    public void setAge(final Integer value) {
+    	this.age = value;
     }
 
 	/**
@@ -704,5 +736,16 @@ public class MiiUserProfileImpl implements MiiUserProfile {
 		}
 		
 		return new ArrayList<PostalAddress>();
+	}
+	
+	public List<? extends Qualification> getQualifications() {
+		
+		if(this.getArrayOfQualification() != null 
+				&& this.getArrayOfQualification().getQualification() != null) {
+			
+			return this.getArrayOfQualification().getQualification();
+		}
+		
+		return new ArrayList<Qualification>();
 	}
 }

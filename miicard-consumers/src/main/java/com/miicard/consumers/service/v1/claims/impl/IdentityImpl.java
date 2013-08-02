@@ -28,13 +28,14 @@ import com.miicard.consumers.service.v1.claims.api.Identity;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Identity", propOrder = {
     "profileUrl",
     "source",
     "userId"
 })
-class IdentityImpl extends ClaimImpl implements Identity {
+public class IdentityImpl extends ClaimImpl implements Identity {
 
 	/**
 	 * String of the Profile URL.

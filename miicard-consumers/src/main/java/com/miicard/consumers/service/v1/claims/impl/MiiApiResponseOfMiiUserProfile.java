@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MiiApiResponseOfMiiUserProfile", propOrder = {
     "data",

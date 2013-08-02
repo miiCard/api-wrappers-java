@@ -28,13 +28,14 @@ import com.miicard.consumers.service.v1.claims.api.EmailAddress;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EmailAddress", propOrder = {
     "address",
     "displayName",
     "isPrimary"
 })
-class EmailAddressImpl extends ClaimImpl implements EmailAddress {
+public class EmailAddressImpl extends ClaimImpl implements EmailAddress {
 
 	/**
 	 * String of the Address.

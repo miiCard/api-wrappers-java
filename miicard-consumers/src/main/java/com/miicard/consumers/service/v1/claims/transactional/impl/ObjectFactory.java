@@ -1,16 +1,10 @@
 package com.miicard.consumers.service.v1.claims.transactional.impl;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Date;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.datatype.Duration;
 import javax.xml.namespace.QName;
 
-import com.miicard.consumers.service.v1.claims.Adapter1;
 import com.miicard.consumers.service.v1.claims.transactional.impl.ArrayOfIdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapshotDetailsImpl;
 import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapshotImpl;
@@ -29,6 +23,7 @@ import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapsh
  * provided in this class.
  * 
  */
+@SuppressWarnings("restriction")
 @XmlRegistry
 public class ObjectFactory {
 

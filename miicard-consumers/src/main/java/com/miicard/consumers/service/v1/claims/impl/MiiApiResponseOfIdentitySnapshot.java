@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.miicard.consumers.service.v1.claims.transactional.impl.IdentitySnapshotImpl;
 
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MiiApiResponseOfIdentitySnapshot", propOrder = {
     "data",

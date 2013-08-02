@@ -1,16 +1,13 @@
 package com.miicard.consumers.service.v1.claims.transactional.impl;
 
-import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.impl.MiiUserProfileImpl;
 
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IdentitySnapshot", propOrder = {
     "details",

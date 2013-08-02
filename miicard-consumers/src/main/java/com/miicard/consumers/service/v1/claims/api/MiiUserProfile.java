@@ -148,6 +148,14 @@ public interface MiiUserProfile {
 	String getUsername();
 	
 	/**
+	 * Gets the age of the miiCard member in full years.
+	 *  
+	 * @return The miiCard member's age, or null if not known
+	 * or shared.
+	 */
+	Integer getAge();
+	
+	/**
 	 * Gets the List of Email addresses 
 	 * associated with this User Profile.
 	 * 
@@ -183,4 +191,6 @@ public interface MiiUserProfile {
 	 * {@link List}
 	 */
 	List<? extends PostalAddress> getPostalAddresses();
+	
+	List<? extends Qualification> getQualifications();
 }

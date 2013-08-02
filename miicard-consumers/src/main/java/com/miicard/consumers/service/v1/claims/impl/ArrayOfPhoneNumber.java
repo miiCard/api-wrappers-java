@@ -26,13 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ArrayOfPhoneNumber", propOrder = {
     "phoneNumber"
 })
-class ArrayOfPhoneNumber {
+public class ArrayOfPhoneNumber {
 
-    @XmlElement(name = "PhoneNumber", nillable = true)
+	@XmlElement(name = "PhoneNumber", nillable = true)
     protected List<PhoneNumberImpl> phoneNumber;
 
     /**
@@ -64,5 +65,9 @@ class ArrayOfPhoneNumber {
         }
         
     	return this.phoneNumber;
+    }
+    
+    public final void setPhoneNumbers(final List<PhoneNumberImpl> value) {
+    	this.phoneNumber = value;
     }
 }

@@ -30,6 +30,7 @@ import com.miicard.consumers.service.v1.claims.api.PhoneNumber;
  * 
  * 
  */
+@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PhoneNumber", propOrder = {
     "countryCode",
@@ -38,7 +39,7 @@ import com.miicard.consumers.service.v1.claims.api.PhoneNumber;
     "isPrimary",
     "nationalNumber"
 })
-class PhoneNumberImpl extends ClaimImpl implements PhoneNumber {
+public class PhoneNumberImpl extends ClaimImpl implements PhoneNumber {
 
     @XmlElement(name = "CountryCode", nillable = true)
     protected String countryCode;

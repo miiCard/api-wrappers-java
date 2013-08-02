@@ -15,6 +15,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
+@SuppressWarnings("restriction")
 @WebServiceClient(
 		name = "Claims", 
 		targetNamespace = "http://tempuri.org/", 

@@ -21,49 +21,61 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
+@SuppressWarnings("restriction")
 @XmlType(name = "MiiApiErrorCode")
 @XmlEnum
 public enum MiiApiErrorCode {
 
 	@XmlEnumValue("Success")
-    SUCCESS("Success"),
+    SUCCESS("Success", 0),
+    
+    @XmlEnumValue("UnknownSearchCriterion")
+    UNKNOWN_SEARCH_CRITERION("UnknownSearchCriterion", 10),
+    
+    @XmlEnumValue("NoMatches")
+	NO_MATCHES("NoMatches", 11),
     
     @XmlEnumValue("AccessRevoked")
-    ACCESS_REVOKED("AccessRevoked"),
+    ACCESS_REVOKED("AccessRevoked", 100),
     
     @XmlEnumValue("UserSubscriptionLapsed")
-    USER_SUBSCRIPTION_LAPSED("UserSubscriptionLapsed"),
+    USER_SUBSCRIPTION_LAPSED("UserSubscriptionLapsed", 200),
     
     @XmlEnumValue("TransactionalSupportDisabled")
-	TRANSACTIONAL_SUPPORT_DISABLED("TransactionalSupportDisabled"),
+	TRANSACTIONAL_SUPPORT_DISABLED("TransactionalSupportDisabled", 1000),
+	
+	@XmlEnumValue("FinancialDataSupportDisabled")
+	FINANCIAL_DATA_SUPPORT_DISABLED("FinancialDataSupportDisabled", 1001),
 	
 	@XmlEnumValue("DevelopmentTransactionalSupportOnly")
-	DEVELOPMENT_TRANSACTIONAL_SUPPORT_ONLY("DevelopmentTransactionalSupportOnly"),
+	DEVELOPMENT_TRANSACTIONAL_SUPPORT_ONLY("DevelopmentTransactionalSupportOnly", 1010),
 	
 	@XmlEnumValue("InvalidSnapshotId")
-	INVALID_SNAPSHOT_ID("InvalidSnapshotId"),
+	INVALID_SNAPSHOT_ID("InvalidSnapshotId", 1020),
 	
 	@XmlEnumValue("Blacklisted")
-	BLACKLISTED("Blacklisted"),
+	BLACKLISTED("Blacklisted", 2000),
 	
 	@XmlEnumValue("ProductDisabled")
-	PRODUCT_DISABLED("ProductDisabled"),
+	PRODUCT_DISABLED("ProductDisabled", 2010),
 	
 	@XmlEnumValue("ProductDeleted")
-	PRODUCT_DELETED("ProductDeleted"),
+	PRODUCT_DELETED("ProductDeleted", 2020),
     
     @XmlEnumValue("Exception")
-    EXCEPTION("Exception");
+    EXCEPTION("Exception", 10000);
     
 	private final String value;
+	private final Integer valueInteger;
 
     /**
      * Value of the MiiApiErrorCode.
      * 
      * @param value value of the MiiApiErrorCode
      */
-    MiiApiErrorCode(String value) {
+    MiiApiErrorCode(String value, Integer valueInteger) {
         this.value = value;
+        this.valueInteger = valueInteger;
     }
 
     /**
@@ -74,13 +86,17 @@ public enum MiiApiErrorCode {
     public String value() {
         return value;
     }
-
+    
     /**
-     * Value of the MiiApiErrorCode.
+     * Value of the MiiApiErrorCode as an integer representation that
+     * matches the API documentation. 
      * 
-     * @param value value of the MiiApiErrorCode
-     * @return MiiApiErrorCode
+     * @return value of the MiiApiErrorCode as an integer
      */
+    public Integer valueInteger() {
+    	return valueInteger;
+    }
+
     public final static MiiApiErrorCode fromValue(
     		final String value) {
         
@@ -92,5 +108,18 @@ public enum MiiApiErrorCode {
         }
         
     	throw new IllegalArgumentException(value);
+    }    
+
+    public final static MiiApiErrorCode fromValue(
+    		final Integer value) {
+        
+    	for (MiiApiErrorCode miiApiErrorCode: MiiApiErrorCode.values()) {
+    		
+    		if (miiApiErrorCode.valueInteger.equals(value)) {
+                return miiApiErrorCode;
+            }
+        }
+        
+    	throw new IllegalArgumentException();
     }
 }

@@ -1,12 +1,10 @@
 package com.miicard.consumers.service.v1.claims.impl;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
+@SuppressWarnings("restriction")
 public class Adapter1 extends XmlAdapter<String, Date> {
 	
 	@SuppressWarnings("deprecation")

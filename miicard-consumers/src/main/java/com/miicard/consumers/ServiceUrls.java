@@ -19,5 +19,16 @@ public class ServiceUrls {
      */
     public static final String CLAIMS_SERVICE_V1 
     	= "https://sts.miicard.com/api/v1/Claims.svc";
-
+    
+    /**
+     * The endpoint URL used for the Financial service.
+     */
+    public static final String FINANCIAL_SERVICE_V1
+    	= "https://sts.miicard.com/api/v1/Financial.svc";
+    
+    /**
+     * The endpoint URL used for the Directory service.
+     */
+    public static final String DIRECTORY_SERVICE_V1
+    	= "https://sts.miicard.com/api/v1/Members";
 }
