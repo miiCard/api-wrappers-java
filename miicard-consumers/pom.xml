@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.miicard</groupId>
   <artifactId>miicard-consumers</artifactId>
-  <version>1.6.1</version>
+  <version>1.7.0</version>
   <dependencies>
     <dependency>
       <groupId>oauth.signpost</groupId>

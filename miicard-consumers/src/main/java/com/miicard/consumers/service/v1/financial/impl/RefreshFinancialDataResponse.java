@@ -15,7 +15,7 @@ import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfFinancialRef
 })
 @XmlRootElement(name = "RefreshFinancialDataResponse", namespace = "http://tempuri.org/")
 public class RefreshFinancialDataResponse {
-	@XmlElement(name = "IsRefreshInProgressResult", namespace = "http://tempuri.org/", nillable = true)
+	@XmlElement(name = "RefreshFinancialDataResult", namespace = "http://tempuri.org/", nillable = true)
 	private MiiApiResponseOfFinancialRefreshStatus refreshFinancialDataResult;
 
 	protected MiiApiResponseOfFinancialRefreshStatus getRefreshFinancialDataResult() {

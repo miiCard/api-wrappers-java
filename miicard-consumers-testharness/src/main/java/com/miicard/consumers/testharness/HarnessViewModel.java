@@ -17,6 +17,7 @@ public class HarnessViewModel {
     private String lastGetIdentitySnapshotDetailsResult;
     private String lastGetIdentitySnapshotResult;
     private String lastGetFinancialTransactionsResult;
+    private String lastGetFinancialTransactionsCreditCardsResult;
     private boolean showAssuranceImage;
     private String assuranceImageType = "";
     private String socialAccountId = "";
@@ -32,8 +33,11 @@ public class HarnessViewModel {
     private boolean cardImageShowEmailAddress;
     private boolean cardImageShowPhoneNumber;
     private String financialDataModestyLimit = "100";
+    private String financialDataCreditCardsModestyLimit = "100";
     private String lastIsRefreshInProgressResult;
+    private String lastIsRefreshInProgressCreditCardsResult;
     private String lastRefreshFinancialDataResult;
+    private String lastRefreshFinancialDataCreditCardsResult;
     private String lastGetAuthenticationDetailsResult;
     
     private String directoryCriterion;
@@ -372,6 +376,14 @@ public class HarnessViewModel {
 	public void setLastGetFinancialTransactionResult(String lastGetFinancialDataResult) {
 		this.lastGetFinancialTransactionsResult = lastGetFinancialDataResult;
 	}
+
+	public String getLastGetFinancialTransactionsCreditCardsResult() {
+		return lastGetFinancialTransactionsCreditCardsResult;
+	}
+
+	public void setLastGetFinancialTransactionCreditCardsResult(String lastGetFinancialDataCreditCardsResult) {
+		this.lastGetFinancialTransactionsCreditCardsResult = lastGetFinancialDataCreditCardsResult;
+	}
 	
 	public String getFinancialDataModestyLimit() {
 		return this.financialDataModestyLimit;
@@ -379,6 +391,14 @@ public class HarnessViewModel {
 	
 	public void setFinancialDataModestyLimit(final String value) {
 		this.financialDataModestyLimit = value;
+	}
+
+	public String getFinancialDataCreditCardsModestyLimit() {
+		return this.financialDataCreditCardsModestyLimit;
+	}
+
+	public void setFinancialDataCreditCardsModestyLimit(final String value) {
+		this.financialDataCreditCardsModestyLimit = value;
 	}
 
 	public String getLastIsRefreshInProgressResult() {
@@ -390,6 +410,15 @@ public class HarnessViewModel {
 		this.lastIsRefreshInProgressResult = lastIsRefreshInProgressResult;
 	}
 
+	public String getLastIsRefreshInProgressCreditCardsResult() {
+		return lastIsRefreshInProgressCreditCardsResult;
+	}
+
+	public void setLastIsRefreshInProgressCreditCardsResult(
+			String lastIsRefreshInProgressCreditCardsResult) {
+		this.lastIsRefreshInProgressCreditCardsResult = lastIsRefreshInProgressCreditCardsResult;
+	}
+
 	public String getLastRefreshFinancialDataResult() {
 		return lastRefreshFinancialDataResult;
 	}
@@ -397,6 +426,15 @@ public class HarnessViewModel {
 	public void setLastRefreshFinancialDataResult(
 			String lastRefreshFinancialDataResult) {
 		this.lastRefreshFinancialDataResult = lastRefreshFinancialDataResult;
+	}
+
+	public String getLastRefreshFinancialDataCreditCardsResult() {
+		return lastRefreshFinancialDataCreditCardsResult;
+	}
+
+	public void setLastRefreshFinancialDataCreditCardsResult(
+			String lastRefreshFinancialDataCreditCardsResult) {
+		this.lastRefreshFinancialDataCreditCardsResult = lastRefreshFinancialDataCreditCardsResult;
 	}
 
 	public String getAuthenticationDetailsSnapshotId() {

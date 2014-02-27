@@ -10,10 +10,12 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 	
     private final static QName _ArrayOfFinancialAccount_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "ArrayOfFinancialAccount");
+    private final static QName _ArrayOfFinancialCreditCard_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "ArrayOfFinancialCreditCard");
     private final static QName _ArrayOfFinancialProvider_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "ArrayOfFinancialProvider");
     private final static QName _ArrayOfFinancialTransaction_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "ArrayOfFinancialTransaction");
     
     private final static QName _FinancialAccount_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "FinancialAccount");
+    private final static QName _FinancialCreditCard_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "FinancialCreditCard");
     private final static QName _FinancialProvider_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "FinancialProvider");
     private final static QName _FinancialTransaction_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "FinancialTransaction");
     private final static QName _RefreshState_QNAME = new QName("http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", "RefreshState");
@@ -26,6 +28,10 @@ public class ObjectFactory {
     	return new ArrayOfFinancialAccount();
     }
     
+    public final ArrayOfFinancialCreditCard createArrayOfFinancialCreditCard() {
+    	return new ArrayOfFinancialCreditCard();
+    }
+    
     public final ArrayOfFinancialProvider createArrayOfFinancialProvider() {
     	return new ArrayOfFinancialProvider();
     }
@@ -36,6 +42,10 @@ public class ObjectFactory {
     
     public final FinancialAccountImpl createFinancialAccount() {
     	return new FinancialAccountImpl();
+    }
+    
+    public final FinancialCreditCardImpl createFinancialCreditCard() {
+    	return new FinancialCreditCardImpl();
     }
     
     public final FinancialProviderImpl createFinancialProvider() {
@@ -53,6 +63,17 @@ public class ObjectFactory {
     	return new JAXBElement<ArrayOfFinancialAccount>(
     			_ArrayOfFinancialAccount_QNAME, 
     			ArrayOfFinancialAccount.class, 
+    			null, 
+    			value);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", name = "ArrayOfFinancialCreditCard")
+    public final JAXBElement<ArrayOfFinancialCreditCard> createArrayOfFinancialCreditCard(
+    		final ArrayOfFinancialCreditCard value) {
+        
+    	return new JAXBElement<ArrayOfFinancialCreditCard>(
+    			_ArrayOfFinancialCreditCard_QNAME, 
+    			ArrayOfFinancialCreditCard.class, 
     			null, 
     			value);
     }
@@ -86,6 +107,17 @@ public class ObjectFactory {
     	return new JAXBElement<FinancialAccountImpl>(
     			_FinancialAccount_QNAME, 
     			FinancialAccountImpl.class, 
+    			null, 
+    			value);
+    }
+    
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api.Financial", name = "FinancialCreditCard")
+    public final JAXBElement<FinancialCreditCardImpl> createFinancialCreditCard(
+    		final FinancialCreditCardImpl value) {
+        
+    	return new JAXBElement<FinancialCreditCardImpl>(
+    			_FinancialCreditCard_QNAME, 
+    			FinancialCreditCardImpl.class, 
     			null, 
     			value);
     }

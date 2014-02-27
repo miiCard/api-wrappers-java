@@ -112,15 +112,36 @@
         else if (action.equals("is-refresh-in-progress")) {
         	viewModel.setLastIsRefreshInProgressResult(Prettify.renderResponse(financialService.isRefreshInProgress(), null));
         }
+        else if (action.equals("is-refresh-in-progress-credit-cards")) {
+		viewModel.setLastIsRefreshInProgressCreditCardsResult(Prettify.renderResponse(financialService.isRefreshInProgressCreditCards(), null));
+        }
         else if (action.equals("refresh-financial-data")) {
-        	viewModel.setLastRefreshFinancialDataResult(Prettify.renderResponse(financialService.refreshFinancialData(), null));
+		viewModel.setLastRefreshFinancialDataResult(Prettify.renderResponse(financialService.refreshFinancialData(), null));
+        }
+        else if (action.equals("refresh-financial-data-credit-cards")) {
+		viewModel.setLastRefreshFinancialDataCreditCardsResult(Prettify.renderResponse(financialService.refreshFinancialDataCreditCards(), null));
         }
         else if (action.equals("get-financial-transactions")) {
-        	PrettifyConfiguration configuration = new PrettifyConfiguration();
+		PrettifyConfiguration configuration = new PrettifyConfiguration();
+		BigDecimal modestyLimit = null;
+
+		try {
+			modestyLimit = new BigDecimal(viewModel.getFinancialDataModestyLimit());
+		}
+		catch (Exception ex) {
+
+		}
+
+		configuration.setModestyLimit(modestyLimit);
+
+		viewModel.setLastGetFinancialTransactionResult(Prettify.renderResponse(financialService.getFinancialData(), configuration));
+        }
+        else if (action.equals("get-financial-transactions-credit-cards")) {
+		PrettifyConfiguration configuration = new PrettifyConfiguration();
         	BigDecimal modestyLimit = null;
         	
         	try {
-        		modestyLimit = new BigDecimal(viewModel.getFinancialDataModestyLimit());
+			modestyLimit = new BigDecimal(viewModel.getFinancialDataCreditCardsModestyLimit());
         	}
         	catch (Exception ex) { 
         		
@@ -128,7 +149,7 @@
         	
         	configuration.setModestyLimit(modestyLimit);
         	
-        	viewModel.setLastGetFinancialTransactionResult(Prettify.renderResponse(financialService.getFinancialData(), configuration));
+		viewModel.setLastGetFinancialTransactionCreditCardsResult(Prettify.renderResponse(financialService.getFinancialDataCreditCards(), configuration));
         }
         else if (action.equals("get-authentication-details"))
         {
@@ -389,6 +410,21 @@
 	                <button type="submit" name="btn-invoke" value="is-refresh-in-progress" class="btn btn-large">Invoke method &raquo;</button>
 	            </div>
 	        </div>
+
+	        <div class="page-header">
+	            <h2><a name="is-refresh-in-progress-credit-cards"></a>IsRefreshInProgressCreditCards
+	            <small>Checks if a financial data refresh is ongoing</small>
+	            </h2>
+	        </div>
+	        <div class="row">
+	            <div class="span12">
+					<h4>Result</h4>
+	                <% if (viewModel.getLastIsRefreshInProgressCreditCardsResult() != null) { %>
+	                <p><%= viewModel.getLastIsRefreshInProgressCreditCardsResult() %></p>
+	                <% } %>
+	                <button type="submit" name="btn-invoke" value="is-refresh-in-progress-credit-cards" class="btn btn-large">Invoke method &raquo;</button>
+	            </div>
+	        </div>
 	        
 	        <div class="page-header">
 	            <h2><a name="refresh-financial-data"></a>RefreshFinancialData
@@ -406,23 +442,57 @@
 	        </div>
 	        
 	        <div class="page-header">
+	            <h2><a name="refresh-financial-data-credit-cards"></a>RefreshFinancialDataCreditCards
+	            <small>Requests financial credit card data be updated</small>
+	            </h2>
+	        </div>
+	        <div class="row">
+	            <div class="span12">
+					<h4>Result</h4>
+	                <% if (viewModel.getLastRefreshFinancialDataCreditCardsResult() != null) { %>
+	                <p><%= viewModel.getLastRefreshFinancialDataCreditCardsResult() %></p>
+	                <% } %>
+	                <button type="submit" name="btn-invoke" value="refresh-financial-data-credit-cards" class="btn btn-large">Invoke method &raquo;</button>
+	            </div>
+	        </div>q
+
+	        <div class="page-header">
 	            <h2><a name="get-financial-transactions"></a>GetFinancialTransactions
 	            <small>Retrieve the financial transactions that the member has shared with you</small>
 	            </h2>
 	        </div>
 	        <div class="row">
 	            <div class="span12">
-	
+
 	                <h4>Result</h4>
 	                <label for="financialDataModestyLimit">Hide values absolutely greater than this for modesty (blank to disable)</label>
 	                <input type="text" name="financialDataModestyLimit" value="<%= viewModel.getFinancialDataModestyLimit() %>" />
-	                
+
 	                <% if (viewModel.getLastGetFinancialTransactionsResult() != null) { %>
 	                <p><%= viewModel.getLastGetFinancialTransactionsResult() %></p>
 	                <% } %>
 	                <button type="submit" name="btn-invoke" value="get-financial-transactions" class="btn btn-large">Invoke method &raquo;</button>
 	            </div>
-	        </div>  
+	        </div>
+
+	        <div class="page-header">
+	            <h2><a name="get-financial-transactions-credit-cards"></a>GetFinancialTransactionsCreditCards
+	            <small>Retrieve the financial credit card transactions that the member has shared with you</small>
+	            </h2>
+	        </div>
+	        <div class="row">
+	            <div class="span12">
+
+	                <h4>Result</h4>
+	                <label for="financialDataCreditCardsModestyLimit">Hide values absolutely greater than this for modesty (blank to disable)</label>
+	                <input type="text" name="financialDataCreditCardsModestyLimit" value="<%= viewModel.getFinancialDataCreditCardsModestyLimit() %>" />
+
+	                <% if (viewModel.getLastGetFinancialTransactionsCreditCardsResult() != null) { %>
+	                <p><%= viewModel.getLastGetFinancialTransactionsCreditCardsResult() %></p>
+	                <% } %>
+	                <button type="submit" name="btn-invoke" value="get-financial-transactions-credit-cards" class="btn btn-large">Invoke method &raquo;</button>
+	            </div>
+	        </div>
         </div>
         
         <div class="directory">

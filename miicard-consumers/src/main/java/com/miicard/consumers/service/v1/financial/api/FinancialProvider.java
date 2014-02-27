@@ -6,4 +6,6 @@ public interface FinancialProvider {
 	String getProviderName();
 	
 	List<? extends FinancialAccount> getFinancialAccounts();
+	
+	List<? extends FinancialCreditCard> getFinancialCreditCards();
 }

@@ -63,10 +63,38 @@ public class MiiCardOAuthFinancialService extends MiiCardOAuthServiceBase {
                 );
     }
     
+    public MiiApiResponse<Boolean> isRefreshInProgressCreditCards() 
+    		throws MiiCardSigningException {
+    	MiiApiResponseOfBoolean response =
+    			this.getAuthorisedService().isRefreshInProgressCreditCards();
+    	
+    	return new MiiApiResponse<Boolean>(                
+    			response.getStatus(), 
+                response.getErrorCode(), 
+                response.getErrorMessage(), 
+                response.isData(),
+                response.getIsTestUser()
+                );
+    }
+    
     public MiiApiResponse<FinancialRefreshStatus> refreshFinancialData() 
     		throws MiiCardSigningException {
     	MiiApiResponseOfFinancialRefreshStatus response =
     			this.getAuthorisedService().refreshFinancialData();
+    	
+    	return new MiiApiResponse<FinancialRefreshStatus>(                
+    			response.getStatus(), 
+                response.getErrorCode(), 
+                response.getErrorMessage(), 
+                response.getData(),
+                response.getIsTestUser()
+                );
+    }
+    
+    public MiiApiResponse<FinancialRefreshStatus> refreshFinancialDataCreditCards() 
+    		throws MiiCardSigningException {
+    	MiiApiResponseOfFinancialRefreshStatus response =
+    			this.getAuthorisedService().refreshFinancialDataCreditCards();
     	
     	return new MiiApiResponse<FinancialRefreshStatus>(                
     			response.getStatus(), 
@@ -81,6 +109,20 @@ public class MiiCardOAuthFinancialService extends MiiCardOAuthServiceBase {
     	throws MiiCardSigningException {
     	MiiApiResponseOfMiiFinancialData response = 
     			this.getAuthorisedService().getFinancialTransactions();
+    	
+    	return new MiiApiResponse<MiiFinancialData>(                
+    			response.getStatus(), 
+                response.getErrorCode(), 
+                response.getErrorMessage(), 
+                response.getData(),
+                response.getIsTestUser()
+                );
+    }
+
+    public MiiApiResponse<MiiFinancialData> getFinancialDataCreditCards() 
+    	throws MiiCardSigningException {
+    	MiiApiResponseOfMiiFinancialData response = 
+    			this.getAuthorisedService().getFinancialTransactionsCreditCards();
     	
     	return new MiiApiResponse<MiiFinancialData>(                
     			response.getStatus(), 

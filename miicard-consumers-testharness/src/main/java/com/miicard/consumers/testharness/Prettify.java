@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import com.miicard.consumers.service.v1.MiiApiResponse;
-
 import com.miicard.consumers.service.v1.claims.api.AuthenticationDetails;
 import com.miicard.consumers.service.v1.claims.api.EmailAddress;
 import com.miicard.consumers.service.v1.claims.api.GeographicLocation;
@@ -16,6 +15,7 @@ import com.miicard.consumers.service.v1.claims.api.PhoneNumber;
 import com.miicard.consumers.service.v1.claims.api.PostalAddress;
 import com.miicard.consumers.service.v1.claims.api.Qualification;
 import com.miicard.consumers.service.v1.financial.api.FinancialAccount;
+import com.miicard.consumers.service.v1.financial.api.FinancialCreditCard;
 import com.miicard.consumers.service.v1.financial.api.FinancialProvider;
 import com.miicard.consumers.service.v1.financial.api.FinancialRefreshStatus;
 import com.miicard.consumers.service.v1.financial.api.FinancialTransaction;
@@ -441,23 +441,84 @@ public class Prettify {
     	return toReturn;
     }
     
+    private final static String renderFinancialCreditCard(final FinancialCreditCard creditCard, PrettifyConfiguration configuration) {
+	String toReturn = "<div class='fact'>";
+
+	toReturn += renderFact("Holder", creditCard.getHolder());
+	toReturn += renderFact("Account number", creditCard.getAccountNumber());
+	toReturn += renderFact("Account name", creditCard.getAccountName());
+	toReturn += renderFact("Type", creditCard.getType());
+	toReturn += renderFact("Last updated", creditCard.getLastUpdatedUtc());
+	toReturn += renderFact("Currency", creditCard.getCurrencyIso());
+	toReturn += renderFact("Credit limit", getModestyFilteredAmount(creditCard.getCreditLimit(), configuration));
+	toReturn += renderFact("Running balance", getModestyFilteredAmount(creditCard.getRunningBalance(), configuration));
+	toReturn += renderFact("Credits (count)", creditCard.getCreditsCount());
+	toReturn += renderFact("Credits (sum)", getModestyFilteredAmount(creditCard.getCreditsSum(), configuration));
+	toReturn += renderFact("Debits (count)", creditCard.getDebitsCount());
+	toReturn += renderFact("Debits (sum)", getModestyFilteredAmount(creditCard.getDebitsSum(), configuration));
+
+	toReturn += renderFactHeading("Transactions");
+
+	toReturn += "<table class='table table-striped table-condensed table-hover'><thead><tr><th>Date</th><th>Description</th><th class='r'>Credit</th><th class='r'>Debit</th></tr></thead><tbody>";
+
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+	for (FinancialTransaction transaction : creditCard.getTransactions())
+	{
+		String desc = transaction.getDescription();
+		if (desc == null) {
+			desc = "[None]";
+		}
+
+		String amountCredited = "";
+		if (transaction.getAmountCredited() != null) {
+			amountCredited = getModestyFilteredAmount(transaction.getAmountCredited(), configuration);
+		}
+
+		String amountDebited = "";
+		if (transaction.getAmountDebited() != null) {
+			amountDebited = getModestyFilteredAmount(transaction.getAmountDebited(), configuration);
+		}
+
+		String dateFormatted = dateFormat.format(transaction.getDate());
+
+		toReturn += "<tr><td>" + dateFormatted + "</td><td title='ID: " + transaction.getID() + "'>" + transaction.getDescription() +"</td><td class='r'>" + amountCredited + "</td><td class='r d'>" + amountDebited + "</td></tr>";
+	}
+
+	toReturn += "</tbody></table>";
+
+	toReturn += "</div>";
+	return toReturn;
+    }
+
     private final static String renderFinancialProvider(FinancialProvider financialProvider, PrettifyConfiguration configuration)
     {
         String toReturn = "<div class='fact'>";
 
         toReturn += renderFact("Name", financialProvider.getProviderName());
 
-        toReturn += renderFactHeading("Financial Accounts");
-
         int ct = 0;
-        if (financialProvider.getFinancialAccounts() != null)
+        if (financialProvider.getFinancialAccounts() != null && !financialProvider.getFinancialAccounts().isEmpty())
         {
-            for (FinancialAccount account : financialProvider.getFinancialAccounts())
-            {
-                toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
-                toReturn += renderFinancialAccount(account, configuration);
-                toReturn += "</div>";
-            }
+		toReturn += renderFactHeading("Financial Accounts");
+
+		for (FinancialAccount account : financialProvider.getFinancialAccounts())
+		{
+			toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
+			toReturn += renderFinancialAccount(account, configuration);
+			toReturn += "</div>";
+		}
+        }
+        else if (financialProvider.getFinancialCreditCards() != null && !financialProvider.getFinancialCreditCards().isEmpty())
+        {
+		toReturn += renderFactHeading("Financial Credit Cards");
+
+		for (FinancialCreditCard creditCard : financialProvider.getFinancialCreditCards())
+		{
+			toReturn += "<div class='fact'><h4>[" + ct++ + "]</h4>";
+			toReturn += renderFinancialCreditCard(creditCard, configuration);
+			toReturn += "</div>";
+		}
         }
 
         toReturn += "</div>";
