@@ -14,6 +14,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.miicard.consumers.service.v1.claims.api.CreditBureauVerification;
 import com.miicard.consumers.service.v1.claims.api.EmailAddress;
 import com.miicard.consumers.service.v1.claims.api.Identity;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
@@ -32,6 +33,7 @@ import com.miicard.consumers.service.v1.claims.api.Qualification;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="CardImageUrl" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="CreditBureauVerification" type="{http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api}CreditBureauVerification" minOccurs="0"/>
  *         &lt;element name="DateOfBirth" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="EmailAddresses" type="{http://schemas.datacontract.org/2004/07/miiCard.STS.Model.Api}ArrayOfEmailAddress" minOccurs="0"/>
  *         &lt;element name="FirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -64,6 +66,7 @@ import com.miicard.consumers.service.v1.claims.api.Qualification;
 @XmlType(name = "MiiUserProfile", propOrder = {
 	"age",
     "cardImageUrl",
+    "creditBureauVerification",
     "dateOfBirth",
     "emailAddresses",
     "firstName",
@@ -93,6 +96,9 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     @XmlElement(name = "CardImageUrl", nillable = true)
     protected String cardImageUrl;
     
+    @XmlElement(name = "CreditBureauVerification", nillable = true)
+    protected CreditBureauVerificationImpl creditBureauVerification;
+
     @XmlElement(name = "DateOfBirth", nillable = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dateOfBirth;
@@ -177,6 +183,28 @@ public class MiiUserProfileImpl implements MiiUserProfile {
     		final String value) {
         
     	this.cardImageUrl = value;
+    }
+
+    /**
+     * Gets the creditBureauVerification property.
+     *
+     * @return possible object is
+     * {@link CreditBureauVerification}
+     */
+    public final CreditBureauVerification getCreditBureauVerification() {
+	return creditBureauVerification;
+    }
+
+    /**
+     * Sets the creditBureauVerification property.
+     *
+     * @param value allowed object is
+     * {@link CreditBureauVerification}
+     */
+    public final void setCreditBureauVerification(
+		final CreditBureauVerificationImpl value) {
+
+	this.creditBureauVerification = value;
     }
 
     /**

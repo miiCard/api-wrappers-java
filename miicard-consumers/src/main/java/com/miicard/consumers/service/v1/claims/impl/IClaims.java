@@ -113,4 +113,22 @@ public interface IClaims {
     MiiApiResponseOfAuthenticationDetails getAuthenticationDetails(
 		@WebParam(name = "snapshotId", targetNamespace = "http://tempuri.org/")
 		String snapshotId);
+
+    /**
+     * @return returns com.miicard.consumers.service.v1.claims.MiiApiResponseOfBoolean
+     */
+    @WebMethod(operationName = "IsCreditBureauRefreshInProgress", action = "http://tempuri.org/IClaims/IsCreditBureauRefreshInProgress")
+    @WebResult(name = "IsCreditBureauRefreshInProgressResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "IsCreditBureauRefreshInProgress", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.IsCreditBureauRefreshInProgress")
+    @ResponseWrapper(localName = "IsCreditBureauRefreshInProgressResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.IsCreditBureauRefreshInProgressResponse")
+    MiiApiResponseOfBoolean isCreditBureauRefreshInProgress();
+
+    /**
+     * @return returns com.miicard.consumers.service.v1.claims.MiiApiResponseOfCreditBureauRefreshStatus
+     */
+    @WebMethod(operationName = "RefreshCreditBureauData", action = "http://tempuri.org/IClaims/RefreshCreditBureauData")
+    @WebResult(name = "RefreshCreditBureauDataResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "RefreshCreditBureauData", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.RefreshCreditBureauData")
+    @ResponseWrapper(localName = "RefreshCreditBureauDataResponse", targetNamespace = "http://tempuri.org/", className = "com.miicard.consumers.service.v1.claims.RefreshCreditBureauDataResponse")
+    MiiApiResponseOfCreditBureauRefreshStatus refreshCreditBureauData();
 }

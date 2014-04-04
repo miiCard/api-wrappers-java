@@ -9,7 +9,7 @@ import com.miicard.consumers.service.v1.financial.api.FinancialRefreshStatus;
 
 @SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MiiApiResponseOfboolean", propOrder = {
+@XmlType(name = "FinancialRefreshStatus", propOrder = {
     "state"
 })
 public class FinancialRefreshStatusImpl implements FinancialRefreshStatus {

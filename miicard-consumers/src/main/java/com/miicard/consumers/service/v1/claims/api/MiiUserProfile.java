@@ -193,4 +193,12 @@ public interface MiiUserProfile {
 	List<? extends PostalAddress> getPostalAddresses();
 	
 	List<? extends Qualification> getQualifications();
+
+	/**
+	 * Gets the credit bureau data
+	 *
+	 * @return possible object is
+	 * {@link CreditBureauVerification}
+	 */
+	CreditBureauVerification getCreditBureauVerification();
 }

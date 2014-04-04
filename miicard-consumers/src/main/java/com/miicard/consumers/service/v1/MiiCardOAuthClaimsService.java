@@ -4,6 +4,7 @@ import com.miicard.consumers.MiiCardSigningException;
 import com.miicard.consumers.ServiceUrls;
 import com.miicard.consumers.service.v1.MiiApiResponse;
 import com.miicard.consumers.service.v1.claims.api.AuthenticationDetails;
+import com.miicard.consumers.service.v1.claims.api.CreditBureauRefreshStatus;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.api.IdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.api.MiiUserProfile;
@@ -12,6 +13,7 @@ import com.miicard.consumers.service.v1.claims.impl.Claims;
 import com.miicard.consumers.service.v1.claims.impl.IClaims;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfArrayOfIdentitySnapshotDetails;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfAuthenticationDetails;
+import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfCreditBureauRefreshStatus;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfIdentitySnapshot;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfMiiUserProfile;
 import com.miicard.consumers.service.v1.claims.impl.MiiApiResponseOfBoolean;
@@ -239,6 +241,36 @@ public class MiiCardOAuthClaimsService extends MiiCardOAuthServiceBase {
 			);
 	}
     
+    public final MiiApiResponse<Boolean> isCreditBureauRefreshInProgress()
+		throws MiiCardSigningException {
+
+	MiiApiResponseOfBoolean response
+		= this.getAuthorisedService().isCreditBureauRefreshInProgress();
+
+	return new MiiApiResponse<Boolean>(
+			response.getStatus(),
+			response.getErrorCode(),
+			response.getErrorMessage(),
+			response.isData(),
+			response.getIsTestUser()
+		);
+	}
+
+    public final MiiApiResponse<CreditBureauRefreshStatus> refreshCreditBureauData()
+		throws MiiCardSigningException {
+
+	MiiApiResponseOfCreditBureauRefreshStatus response
+		= this.getAuthorisedService().refreshCreditBureauData();
+
+	return new MiiApiResponse<CreditBureauRefreshStatus>(
+			response.getStatus(),
+			response.getErrorCode(),
+			response.getErrorMessage(),
+			response.getData(),
+			response.getIsTestUser()
+		);
+	}
+
     /**
      * Gets the Authorised Service.
      * 
