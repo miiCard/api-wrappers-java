@@ -109,6 +109,12 @@
         	
         	return;
         }
+        else if (action.equals("is-credit-bureau-refresh-in-progress")) {
+		viewModel.setLastIsCreditBureauRefreshInProgressResult(Prettify.renderResponse(service.isCreditBureauRefreshInProgress(), null));
+        }
+        else if (action.equals("refresh-credit-bureau-data")) {
+		viewModel.setLastRefreshCreditBureauDataResult(Prettify.renderResponse(service.refreshCreditBureauData(), null));
+        }
         else if (action.equals("is-refresh-in-progress")) {
         	viewModel.setLastIsRefreshInProgressResult(Prettify.renderResponse(financialService.isRefreshInProgress(), null));
         }
@@ -387,6 +393,36 @@
                 <button type="submit" name="btn-invoke" value="get-authentication-details" class="btn btn-large">Invoke method &raquo;</button>
             </div>
         </div>        
+
+        <div class="page-header">
+            <h2><a name="is-credit-bureau-refresh-in-progress"></a>IsCreditBureauRefreshInProgress
+            <small>Checks if a credit bureau data refresh is ongoing</small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h4>Result</h4>
+                <% if (viewModel.getLastIsCreditBureauRefreshInProgressResult() != null) { %>
+                <p><%= viewModel.getLastIsCreditBureauRefreshInProgressResult() %></p>
+                <% } %>
+                <button type="submit" name="btn-invoke" value="is-credit-bureau-refresh-in-progress" class="btn btn-large">Invoke method &raquo;</button>
+            </div>
+        </div>
+
+        <div class="page-header">
+            <h2><a name="refresh-credit-bureau-data"></a>RefreshCreditBureauData
+            <small>Requests credit bureau data be updated</small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h4>Result</h4>
+                <% if (viewModel.getLastRefreshCreditBureauDataResult() != null) { %>
+                <p><%= viewModel.getLastRefreshCreditBureauDataResult() %></p>
+                <% } %>
+                <button type="submit" name="btn-invoke" value="refresh-credit-bureau-data" class="btn btn-large">Invoke method &raquo;</button>
+            </div>
+        </div>
         
         <div class="financials">            
         
@@ -454,7 +490,7 @@
 	                <% } %>
 	                <button type="submit" name="btn-invoke" value="refresh-financial-data-credit-cards" class="btn btn-large">Invoke method &raquo;</button>
 	            </div>
-	        </div>q
+	        </div>
 
 	        <div class="page-header">
 	            <h2><a name="get-financial-transactions"></a>GetFinancialTransactions

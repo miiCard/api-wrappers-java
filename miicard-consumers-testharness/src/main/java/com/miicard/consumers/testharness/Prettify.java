@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 
 import com.miicard.consumers.service.v1.MiiApiResponse;
 import com.miicard.consumers.service.v1.claims.api.AuthenticationDetails;
+import com.miicard.consumers.service.v1.claims.api.CreditBureauRefreshStatus;
+import com.miicard.consumers.service.v1.claims.api.CreditBureauVerification;
 import com.miicard.consumers.service.v1.claims.api.EmailAddress;
 import com.miicard.consumers.service.v1.claims.api.GeographicLocation;
 import com.miicard.consumers.service.v1.claims.api.Identity;
@@ -90,6 +92,10 @@ public class Prettify {
 		else if (obj instanceof IdentitySnapshot)
 		{
 			return Prettify.renderIdentitySnapshot((IdentitySnapshot) obj, configuration);
+		}
+		else if (obj instanceof CreditBureauRefreshStatus)
+		{
+			return Prettify.renderCreditBureauRefreshStatus((CreditBureauRefreshStatus) obj, configuration);
 		}
 		else if (obj instanceof MiiFinancialData)
 		{
@@ -322,6 +328,13 @@ public class Prettify {
         	}
         }
         
+        toReturn += renderFactHeading("Credit Bureau Data");
+
+        if (profile.getCreditBureauVerification() != null)
+        {
+            toReturn += renderCreditBureauVerification(profile.getCreditBureauVerification());
+        }
+
         if (profile.getPublicProfile() != null) {
         	
         	toReturn += "<div class='fact'>";
@@ -624,5 +637,26 @@ public class Prettify {
         toReturn += "</div>";
 
         return toReturn;    	
+    }
+
+    public final static String renderCreditBureauVerification(CreditBureauVerification verification) {
+	String toReturn = "<div class='fact'>";
+
+	toReturn += renderFact("Last verified", verification.getLastVerified());
+	toReturn += renderFact("Data", verification.getData());
+
+	toReturn += "</div>";
+
+	return toReturn;
+    }
+
+    private final static String renderCreditBureauRefreshStatus(CreditBureauRefreshStatus status, PrettifyConfiguration configuration) {
+	String toReturn = "<div class='fact'>";
+
+	toReturn += renderFact("State", status.getState());
+
+	toReturn += "</div>";
+
+	return toReturn;
     }
 }

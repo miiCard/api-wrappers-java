@@ -14,6 +14,8 @@ public class HarnessViewModel {
     private String lastGetClaimsResult;
     private String lastIsUserAssuredResult;
     private String lastIsSocialAccountAssuredResult;
+    private String lastIsCreditBureauRefreshInProgressResult;
+    private String lastRefreshCreditBureauDataResult;
     private String lastGetIdentitySnapshotDetailsResult;
     private String lastGetIdentitySnapshotResult;
     private String lastGetFinancialTransactionsResult;
@@ -185,6 +187,28 @@ public class HarnessViewModel {
         
     	this.lastIsSocialAccountAssuredResult 
     		= lastIsSocialAccountAssuredResult;
+    }
+
+    public final String getLastIsCreditBureauRefreshInProgressResult() {
+        return lastIsCreditBureauRefreshInProgressResult;
+    }
+
+    public final void setLastIsCreditBureauRefreshInProgressResult(
+		final String lastIsCreditBureauRefreshInProgressResult) {
+
+	this.lastIsCreditBureauRefreshInProgressResult
+		= lastIsCreditBureauRefreshInProgressResult;
+    }
+
+    public final String getLastRefreshCreditBureauDataResult() {
+        return lastRefreshCreditBureauDataResult;
+    }
+
+    public final void setLastRefreshCreditBureauDataResult(
+		final String lastRefreshCreditBureauDataResult) {
+
+	this.lastRefreshCreditBureauDataResult
+		= lastRefreshCreditBureauDataResult;
     }
     
     public final String getLastGetIdentitySnapshotDetailsResult() {
